@@ -8,7 +8,6 @@ import 'package:shoes_app/Views/Home/Screens/Widgets/HomePromoSlider.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItem.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
-import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
 import 'package:shoes_app/utils/shared/CSectionHeading.dart';
 
