@@ -1,11 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/CategoriesListView.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomeAppBar.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomeBase.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/HomePromoSlider.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItem.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
-import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
+import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
 import 'package:shoes_app/utils/shared/CSectionHeading.dart';
 
@@ -14,6 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = CHelperFunctions.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -39,57 +43,29 @@ class HomeScreen extends StatelessWidget {
                           textcolor: CColors.white,
                         ),
                         SizedBox(height: CSizes.spaceBtwItems),
-                        SizedBox(
-                          height: 80,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 6,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                  right: CSizes.spaceBtwItems,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 55,
-                                      width: 55,
-                                      padding: EdgeInsets.all(CSizes.sm),
-                                      decoration: BoxDecoration(
-                                        color: CColors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                      child: Image(
-                                        image: AssetImage(CImages.shoeIcon),
-                                        fit: BoxFit.cover,
-                                        color: CColors.dark,
-                                      ),
-                                    ),
-                                    SizedBox(height: CSizes.spaceBtwItems / 2),
-                                    Text(
-                                      'Shoes',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium!
-                                          .apply(
-                                            color: CColors.white,
-                                          ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        )
+                        CategoriesListView(),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
+            ),
+            HomePromoSlider(),
+            SizedBox(height: CSizes.spaceBtwSections),
+            GridView.builder(
+              itemCount: 4,
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(horizontal: CSizes.lg),
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: CSizes.gridViewSpacing,
+                mainAxisSpacing: CSizes.gridViewSpacing,
+                mainAxisExtent: 288,
+              ),
+              itemBuilder: (context, index) {
+                return CProductItem();
+              },
             )
           ],
         ),
