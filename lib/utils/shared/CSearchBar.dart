@@ -12,17 +12,19 @@ class CSearchBar extends StatelessWidget {
     required this.showbackground,
     required this.showborder,
     this.icon = Iconsax.search_normal,
+    this.padding = const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
   });
 
   final IconData? icon;
   final String text;
   final bool showbackground, showborder;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
     final isdark = CHelperFunctions.isDarkMode(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
+      padding: padding,
       child: Container(
         width: CDeviceUtils.getScreenWidth(context),
         padding: const EdgeInsets.all(CSizes.md),

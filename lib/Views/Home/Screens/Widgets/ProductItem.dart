@@ -78,7 +78,6 @@ class CProductItem extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: CSizes.spaceBtwItems / 2),
           Padding(
             padding: const EdgeInsets.only(left: CSizes.xs),
             child: Column(
@@ -103,41 +102,43 @@ class CProductItem extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(height: CSizes.spaceBtwItems),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '\$35',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: CColors.dark,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            CSizes.cardRadiusMd,
-                          ),
-                          bottomRight:
-                              Radius.circular(CSizes.productImageRadius),
-                        ),
-                      ),
-                      child: const SizedBox(
-                        height: CSizes.iconLg * 1.2,
-                        width: CSizes.iconLg * 1.2,
-                        child: Icon(
-                          Iconsax.add,
-                          color: CColors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: CSizes.xs),
+                child: Text(
+                  '\$35.0',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: CColors.dark,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      CSizes.cardRadiusMd,
+                    ),
+                    bottomRight: Radius.circular(CSizes.productImageRadius),
+                  ),
+                ),
+                child: const SizedBox(
+                  height: CSizes.iconLg * 1.2,
+                  width: CSizes.iconLg * 1.2,
+                  child: Icon(
+                    Iconsax.add,
+                    color: CColors.white,
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

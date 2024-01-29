@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 
-class ShoppingCartIcon extends StatelessWidget {
-  const ShoppingCartIcon(
-      {super.key, required this.iconcolor, required this.onPressed});
+class CShoppingCartIcon extends StatelessWidget {
+  const CShoppingCartIcon(
+      {super.key, this.iconcolor = CColors.black, this.onPressed});
 
-  final Color iconcolor;
-  final VoidCallback onPressed;
+  final Color? iconcolor;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {

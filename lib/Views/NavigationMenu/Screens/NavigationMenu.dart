@@ -14,9 +14,9 @@ class NavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final navigatorcontroller = Get.put(NavigatorController());
     bool dark = CHelperFunctions.isDarkMode(context);
-    return Scaffold(
-      bottomNavigationBar: Obx(
-        () => NavigationBar(
+    return Obx(
+      () => Scaffold(
+        bottomNavigationBar: NavigationBar(
           height: 80,
           elevation: 0,
           selectedIndex: navigatorcontroller.selectedindex.value,
@@ -33,8 +33,9 @@ class NavigationMenu extends StatelessWidget {
             NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
           ],
         ),
+        body:
+            navigatorcontroller.pages[navigatorcontroller.selectedindex.value],
       ),
-      body: navigatorcontroller.pages[navigatorcontroller.selectedindex.value],
     );
   }
 }

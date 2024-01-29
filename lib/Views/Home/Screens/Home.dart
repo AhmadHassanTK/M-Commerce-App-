@@ -8,8 +8,9 @@ import 'package:shoes_app/Views/Home/Screens/Widgets/HomePromoSlider.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItem.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
+import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
-import 'package:shoes_app/utils/shared/CSectionHeading.dart';
+import 'package:shoes_app/utils/shared/CSectionTitle.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -35,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: CSizes.defaultSpace),
                     child: Column(
                       children: [
-                        CSectionHeading(
+                        CSectionTitle(
                           title: 'Popular Categories',
                           showactionbutton: false,
                           textcolor: CColors.white,
@@ -50,20 +51,14 @@ class HomeScreen extends StatelessWidget {
             ),
             HomePromoSlider(),
             SizedBox(height: CSizes.spaceBtwSections),
-            GridView.builder(
-              itemCount: 4,
-              shrinkWrap: true,
-              padding: EdgeInsets.symmetric(horizontal: CSizes.lg),
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: CSizes.gridViewSpacing,
-                mainAxisSpacing: CSizes.gridViewSpacing,
-                mainAxisExtent: 288,
-              ),
-              itemBuilder: (context, index) {
-                return CProductItem();
-              },
+            Padding(
+              padding: const EdgeInsets.only(left: CSizes.defaultSpace),
+              child: CSectionTitle(
+                  title: 'Popular Products', showactionbutton: true),
+            ),
+            CGridView(
+              itemcount: 4,
+              child: CProductItem(),
             )
           ],
         ),

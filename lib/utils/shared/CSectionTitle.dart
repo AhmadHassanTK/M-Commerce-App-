@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CSectionHeading extends StatelessWidget {
-  const CSectionHeading({
+class CSectionTitle extends StatelessWidget {
+  const CSectionTitle({
     this.buttontitle = 'View all',
     required this.title,
     this.textcolor,
@@ -17,6 +17,7 @@ class CSectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
