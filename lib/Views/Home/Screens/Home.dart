@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/CategoriesListView.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomeAppBar.dart';
-import 'package:shoes_app/Views/Home/Screens/Widgets/HomeBase.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomePromoSlider.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItem.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
+import 'package:shoes_app/utils/shared/CPrimaryHeaderContainer.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
 
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HomeBase(
+            CPrimaryHeaderContainer(
               child: Column(
                 children: [
                   HomeAppBar(),
@@ -46,6 +46,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: CSizes.spaceBtwItems / 0.3),
                 ],
               ),
             ),

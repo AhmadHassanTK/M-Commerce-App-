@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/shared/CCurvedEdges.dart';
 
-class HomeBase extends StatelessWidget {
-  const HomeBase({super.key, required this.child});
+class CPrimaryHeaderContainer extends StatelessWidget {
+  const CPrimaryHeaderContainer({super.key, required this.child});
 
   final Widget child;
 
@@ -15,7 +15,6 @@ class HomeBase extends StatelessWidget {
         color: CColors.primary,
         padding: const EdgeInsets.all(0),
         child: SizedBox(
-          height: 400,
           child: Stack(
             children: [
               Positioned(
