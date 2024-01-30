@@ -14,24 +14,26 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: CDeviceUtils.getAppBarHeight(),
-            right: CSizes.defaultSpace,
-            left: CSizes.defaultSpace,
-            bottom: CSizes.defaultSpace,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              LoginHeader(),
-              LoginForm(),
-              CDivider(text: CTexts.orSignInWith),
-              SizedBox(height: CSizes.spaceBtwSections),
-              CSocialButtons(),
-            ],
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: CDeviceUtils.getAppBarHeight(),
+              right: CSizes.defaultSpace,
+              left: CSizes.defaultSpace,
+              bottom: CSizes.defaultSpace,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LoginHeader(),
+                LoginForm(),
+                CDivider(text: CTexts.orSignInWith),
+                SizedBox(height: CSizes.spaceBtwSections),
+                CSocialButtons(),
+              ],
+            ),
           ),
         ),
       ),

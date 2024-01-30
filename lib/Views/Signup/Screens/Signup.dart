@@ -15,47 +15,49 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(CSizes.defaultSpace),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  CTexts.signupTitle,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: CSizes.spaceBtwSections),
-                SignupForm(),
-                SizedBox(height: CSizes.spaceBtwSections),
-                Row(
-                  children: [
-                    Checkbox(value: true, onChanged: (value) {}),
-                    SizedBox(width: CSizes.spaceBtwItems),
-                    Expanded(
-                      child: SignupTerms(),
-                    ),
-                  ],
-                ),
-                SizedBox(height: CSizes.spaceBtwSections),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.to(() => VerifyEmailScreen());
-                    },
-                    child: Text(CTexts.createAccount),
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(CSizes.defaultSpace),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    CTexts.signupTitle,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                ),
-                SizedBox(height: CSizes.spaceBtwSections),
-                CDivider(text: CTexts.orSignUpWith),
-                SizedBox(height: CSizes.spaceBtwItems),
-                CSocialButtons(),
-              ],
+                  SizedBox(height: CSizes.spaceBtwSections),
+                  SignupForm(),
+                  SizedBox(height: CSizes.spaceBtwSections),
+                  Row(
+                    children: [
+                      Checkbox(value: true, onChanged: (value) {}),
+                      SizedBox(width: CSizes.spaceBtwItems),
+                      Expanded(
+                        child: SignupTerms(),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: CSizes.spaceBtwSections),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => VerifyEmailScreen());
+                      },
+                      child: Text(CTexts.createAccount),
+                    ),
+                  ),
+                  SizedBox(height: CSizes.spaceBtwSections),
+                  CDivider(text: CTexts.orSignUpWith),
+                  SizedBox(height: CSizes.spaceBtwItems),
+                  CSocialButtons(),
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }

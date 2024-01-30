@@ -13,44 +13,46 @@ class EmailVerifySuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: CDeviceUtils.getAppBarHeight(),
-            right: CSizes.defaultSpace,
-            left: CSizes.defaultSpace,
-            bottom: CSizes.defaultSpace,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image(
-                image: AssetImage(CImages.staticSuccessIllustration),
-              ),
-              const SizedBox(height: CSizes.spaceBtwSections),
-              Text(
-                CTexts.yourAccountCreatedTitle,
-                style: Theme.of(context).textTheme.headlineSmall,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: CSizes.spaceBtwItems),
-              Text(
-                CTexts.yourAccountCreatedSubTitle,
-                style: Theme.of(context).textTheme.labelMedium,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: CSizes.spaceBtwSections),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => LoginScreen());
-                  },
-                  child: Text(CTexts.tContinue),
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: CDeviceUtils.getAppBarHeight(),
+              right: CSizes.defaultSpace,
+              left: CSizes.defaultSpace,
+              bottom: CSizes.defaultSpace,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage(CImages.staticSuccessIllustration),
                 ),
-              ),
-            ],
+                const SizedBox(height: CSizes.spaceBtwSections),
+                Text(
+                  CTexts.yourAccountCreatedTitle,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: CSizes.spaceBtwItems),
+                Text(
+                  CTexts.yourAccountCreatedSubTitle,
+                  style: Theme.of(context).textTheme.labelMedium,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: CSizes.spaceBtwSections),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(() => LoginScreen());
+                    },
+                    child: Text(CTexts.tContinue),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

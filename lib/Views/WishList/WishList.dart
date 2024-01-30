@@ -12,25 +12,27 @@ class WishListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CAppBar(
-        title: Text(
-          'Wishlist',
-          style: Theme.of(context).textTheme.headlineMedium,
+    return SafeArea(
+      child: Scaffold(
+        appBar: CAppBar(
+          title: Text(
+            'Wishlist',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () => Get.to(() => const HomeScreen()),
+              icon: const Icon(Iconsax.add),
+            )
+          ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () => Get.to(() => const HomeScreen()),
-            icon: const Icon(Iconsax.add),
-          )
-        ],
-      ),
-      body: const SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(CSizes.defaultSpace),
-          child: CGridView(
-            itemcount: 6,
-            child: CProductItem(),
+        body: const SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(CSizes.defaultSpace),
+            child: CGridView(
+              itemcount: 6,
+              child: CProductItem(),
+            ),
           ),
         ),
       ),
