@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
+import 'package:shoes_app/utils/constants/sizes.dart';
 
 class CRoundedIcon extends StatelessWidget {
   const CRoundedIcon({
@@ -9,12 +10,14 @@ class CRoundedIcon extends StatelessWidget {
     this.backgroundColor = CColors.darkGrey,
     required this.icon,
     this.iconcolor = CColors.white,
+    this.iconsize = CSizes.lg,
   });
 
   final double? width, height;
   final Color? backgroundColor;
   final IconData icon;
   final Color? iconcolor;
+  final double? iconsize;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,7 @@ class CRoundedIcon extends StatelessWidget {
           icon: Icon(
             icon,
             color: iconcolor,
+            size: iconsize,
           )),
     );
   }

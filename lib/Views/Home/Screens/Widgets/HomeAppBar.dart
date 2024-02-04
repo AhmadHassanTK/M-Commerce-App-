@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shoes_app/Views/Cart/Cart.dart';
 import 'package:shoes_app/utils/shared/CShoppingBagIcon.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/text_strings.dart';
@@ -28,7 +30,9 @@ class HomeAppBar extends StatelessWidget {
       actions: [
         CShoppingCartIcon(
           iconcolor: CColors.white,
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => const CartView());
+          },
         )
       ],
     );

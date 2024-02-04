@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Views/AddressPage/Address.dart';
+import 'package:shoes_app/Views/Cart/Cart.dart';
+import 'package:shoes_app/Views/Orders/Orders.dart';
 import 'package:shoes_app/Views/Profile/widgets/Profiletiles.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
@@ -45,26 +49,32 @@ class ProfileScreen extends StatelessWidget {
                     showactionbutton: false,
                   ),
                   ProfileTile(
-                      leading: Icon(
-                        Iconsax.safe_home,
-                        color: CColors.primary,
-                      ),
-                      title: 'My Addresses',
-                      subtitle: 'Set Shopping delivery address'),
+                    leading: Icon(
+                      Iconsax.safe_home,
+                      color: CColors.primary,
+                    ),
+                    title: 'My Addresses',
+                    subtitle: 'Set Shopping delivery address',
+                    onTap: () => Get.to(() => AddressView()),
+                  ),
                   ProfileTile(
-                      leading: Icon(
-                        Iconsax.shopping_cart,
-                        color: CColors.primary,
-                      ),
-                      title: 'My Cart',
-                      subtitle: 'Add, reomve products and move to checkout'),
+                    leading: Icon(
+                      Iconsax.shopping_cart,
+                      color: CColors.primary,
+                    ),
+                    title: 'My Cart',
+                    subtitle: 'Add, reomve products and move to checkout',
+                    onTap: () => Get.to(() => const CartView()),
+                  ),
                   ProfileTile(
-                      leading: Icon(
-                        Iconsax.bag_tick,
-                        color: CColors.primary,
-                      ),
-                      title: 'My Orders',
-                      subtitle: 'In-progress and Completed order'),
+                    leading: Icon(
+                      Iconsax.bag_tick,
+                      color: CColors.primary,
+                    ),
+                    title: 'My Orders',
+                    subtitle: 'In-progress and Completed order',
+                    onTap: () => Get.to(() => const OrdersScreen()),
+                  ),
                   ProfileTile(
                       leading: Icon(
                         Iconsax.bank,

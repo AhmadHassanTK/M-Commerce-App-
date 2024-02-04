@@ -17,13 +17,15 @@ class CProductPriceText extends StatelessWidget {
   final int maxlines;
   @override
   Widget build(BuildContext context) {
-    return Text(currancysign + price,
-        maxLines: maxlines,
-        overflow: TextOverflow.ellipsis,
-        style: islarge
-            ? Theme.of(context).textTheme.headlineMedium!.apply(
-                decoration: linethrough ? TextDecoration.lineThrough : null)
-            : Theme.of(context).textTheme.titleLarge!.apply(
-                decoration: linethrough ? TextDecoration.lineThrough : null));
+    return Text(
+      currancysign + price,
+      maxLines: maxlines,
+      overflow: TextOverflow.ellipsis,
+      style: islarge
+          ? Theme.of(context).textTheme.headlineMedium!.apply(
+              decoration: linethrough ? TextDecoration.lineThrough : null)
+          : Theme.of(context).textTheme.titleLarge!.apply(
+              decoration: linethrough ? TextDecoration.lineThrough : null),
+    );
   }
 }

@@ -10,6 +10,7 @@ import 'package:shoes_app/utils/shared/CBoxshadow.dart';
 import 'package:shoes_app/utils/shared/CProductTitleText.dart';
 import 'package:shoes_app/utils/shared/CRoundedContainer.dart';
 import 'package:shoes_app/utils/shared/CRoundedImage.dart';
+import 'package:shoes_app/utils/shared/CVerfiedIconWithText.dart';
 
 class CProductItem extends StatelessWidget {
   const CProductItem({
@@ -85,30 +86,17 @@ class CProductItem extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: CSizes.xs),
+            const Padding(
+              padding: EdgeInsets.only(left: CSizes.xs),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CProductTitleText(
+                  CProductTitleText(
                     title: 'Green Nike Air Shoes',
                     smallsize: true,
                   ),
-                  const SizedBox(height: CSizes.spaceBtwItems / 2),
-                  Row(
-                    children: [
-                      Text(
-                        'Nike',
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      const SizedBox(width: CSizes.xs),
-                      const Icon(
-                        Iconsax.verify5,
-                        color: CColors.primary,
-                        size: CSizes.iconXs,
-                      )
-                    ],
-                  ),
+                  SizedBox(height: CSizes.spaceBtwItems / 2),
+                  CVerifiedIconWithText(text: 'Nike'),
                 ],
               ),
             ),
