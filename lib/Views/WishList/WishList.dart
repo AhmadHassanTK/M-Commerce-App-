@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/Views/Home/Screens/Home.dart';
-import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItem.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
@@ -31,7 +31,7 @@ class WishListView extends StatelessWidget {
             padding: EdgeInsets.all(CSizes.defaultSpace),
             child: CGridView(
               itemcount: 6,
-              child: CProductItem(),
+              child: CProductItemV(),
             ),
           ),
         ),

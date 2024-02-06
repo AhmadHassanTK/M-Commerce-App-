@@ -12,8 +12,8 @@ import 'package:shoes_app/utils/shared/CRoundedContainer.dart';
 import 'package:shoes_app/utils/shared/CRoundedImage.dart';
 import 'package:shoes_app/utils/shared/CVerfiedIconWithText.dart';
 
-class CProductItem extends StatelessWidget {
-  const CProductItem({
+class CProductItemV extends StatelessWidget {
+  const CProductItemV({
     super.key,
     this.ontap,
   });

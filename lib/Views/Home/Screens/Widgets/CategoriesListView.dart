@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shoes_app/Views/SubCategories/SubCategories.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
@@ -21,32 +23,35 @@ class CategoriesListView extends StatelessWidget {
             padding: const EdgeInsets.only(
               right: CSizes.spaceBtwItems,
             ),
-            child: Column(
-              children: [
-                Container(
-                  height: 55,
-                  width: 55,
-                  padding: const EdgeInsets.all(CSizes.sm),
-                  decoration: BoxDecoration(
-                    color: CColors.white,
-                    borderRadius: BorderRadius.circular(100),
+            child: GestureDetector(
+              onTap: () => Get.to(() => const SubCategoriesScreen()),
+              child: Column(
+                children: [
+                  Container(
+                    height: 55,
+                    width: 55,
+                    padding: const EdgeInsets.all(CSizes.sm),
+                    decoration: BoxDecoration(
+                      color: CColors.white,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: const Image(
+                      image: AssetImage(CImages.shoeIcon),
+                      fit: BoxFit.cover,
+                      color: CColors.dark,
+                    ),
                   ),
-                  child: const Image(
-                    image: AssetImage(CImages.shoeIcon),
-                    fit: BoxFit.cover,
-                    color: CColors.dark,
-                  ),
-                ),
-                const SizedBox(height: CSizes.spaceBtwItems / 2),
-                Text(
-                  'Shoes',
-                  style: Theme.of(context).textTheme.labelMedium!.apply(
-                        color: CColors.white,
-                      ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                )
-              ],
+                  const SizedBox(height: CSizes.spaceBtwItems / 2),
+                  Text(
+                    'Shoes',
+                    style: Theme.of(context).textTheme.labelMedium!.apply(
+                          color: CColors.white,
+                        ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ],
+              ),
             ),
           );
         },

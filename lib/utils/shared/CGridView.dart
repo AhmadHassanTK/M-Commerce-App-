@@ -4,7 +4,7 @@ import 'package:shoes_app/utils/constants/sizes.dart';
 class CGridView extends StatelessWidget {
   const CGridView({
     super.key,
-    this.itemcount = 1,
+    required this.itemcount,
     required this.child,
     this.mainaxisextent = 288,
   });

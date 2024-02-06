@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItem.dart';
+import 'package:get/get.dart';
+import 'package:shoes_app/Views/Brands/Brands.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
@@ -48,21 +50,22 @@ class StoreView extends StatelessWidget {
                     child: ListView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      children: const [
-                        SizedBox(height: CSizes.spaceBtwItems),
-                        CSearchBar(
+                      children: [
+                        const SizedBox(height: CSizes.spaceBtwItems),
+                        const CSearchBar(
                           text: 'Search in Store',
                           showbackground: false,
                           showborder: true,
                           padding: EdgeInsets.zero,
                         ),
-                        SizedBox(height: CSizes.spaceBtwItems),
+                        const SizedBox(height: CSizes.spaceBtwItems),
                         CSectionTitle(
                           title: 'Featured Brands',
                           showactionbutton: true,
+                          onPressed: () => Get.to(() => const BrandsScreen()),
                         ),
-                        SizedBox(height: CSizes.spaceBtwItems / 2),
-                        CGridView(
+                        const SizedBox(height: CSizes.spaceBtwItems / 2),
+                        const CGridView(
                           itemcount: 4,
                           mainaxisextent: 80,
                           child: CProductContainer(),
@@ -106,7 +109,7 @@ class StoreView extends StatelessWidget {
                             SizedBox(height: CSizes.spaceBtwItems),
                             CGridView(
                               itemcount: 4,
-                              child: CProductItem(),
+                              child: CProductItemV(),
                             ),
                           ],
                         ),

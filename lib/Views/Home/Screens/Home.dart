@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/CategoriesListView.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomeAppBar.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomePromoSlider.dart';
-import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItem.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
+import 'package:shoes_app/Views/ViewAllProducts/ViewAllProducts.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
@@ -55,11 +57,14 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: CSizes.defaultSpace),
               child: CSectionTitle(
-                  title: 'Popular Products', showactionbutton: true),
+                title: 'Popular Products',
+                showactionbutton: true,
+                onPressed: () => Get.to(() => ViewAllProductsScreen()),
+              ),
             ),
             CGridView(
               itemcount: 4,
-              child: CProductItem(),
+              child: CProductItemV(),
             )
           ],
         ),
