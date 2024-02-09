@@ -1,5 +1,4 @@
-
-class TValidator {
+class CValidator {
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email is required.';
@@ -58,5 +57,11 @@ class TValidator {
     return null;
   }
 
-// Add more custom validators as needed for your specific requirements.
+  static String? validateEmtyText(String? fieldname, String? value) {
+    if (value == null || value.isEmpty) {
+      return '$fieldname is required.';
+    }
+
+    return null;
+  }
 }

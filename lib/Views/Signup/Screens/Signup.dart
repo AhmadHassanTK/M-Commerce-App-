@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_app/Views/Signup/Controller/SignUpController.dart';
 import 'package:shoes_app/Views/Signup/Screens/Widgets/SignupForm.dart';
 import 'package:shoes_app/Views/Signup/Screens/Widgets/SignupTerms.dart';
-import 'package:shoes_app/Views/VerifyEmail/Screens/VerifyEmail.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/constants/text_strings.dart';
 import 'package:shoes_app/utils/shared/CDivider.dart';
@@ -15,6 +13,7 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = SignUpController.instance;
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(),
@@ -28,32 +27,38 @@ class SignupScreen extends StatelessWidget {
                     CTexts.signupTitle,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  SizedBox(height: CSizes.spaceBtwSections),
-                  SignupForm(),
-                  SizedBox(height: CSizes.spaceBtwSections),
+                  const SizedBox(height: CSizes.spaceBtwSections),
+                  const SignupForm(),
+                  const SizedBox(height: CSizes.spaceBtwSections),
                   Row(
                     children: [
-                      Checkbox(value: true, onChanged: (value) {}),
-                      SizedBox(width: CSizes.spaceBtwItems),
-                      Expanded(
+                      Obx(() => Checkbox(
+                          value: controller.privacypolicy.value,
+                          onChanged: (value) {
+                            controller.privacypolicy.value =
+                                !controller.privacypolicy.value;
+                          })),
+                      const SizedBox(width: CSizes.spaceBtwItems),
+                      const Expanded(
                         child: SignupTerms(),
                       ),
                     ],
                   ),
-                  SizedBox(height: CSizes.spaceBtwSections),
+                  const SizedBox(height: CSizes.spaceBtwSections),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.to(() => VerifyEmailScreen());
+                        // Get.to(() => const VerifyEmailScreen());
+                        controller.signUp();
                       },
-                      child: Text(CTexts.createAccount),
+                      child: const Text(CTexts.createAccount),
                     ),
                   ),
-                  SizedBox(height: CSizes.spaceBtwSections),
+                  const SizedBox(height: CSizes.spaceBtwSections),
                   CDivider(text: CTexts.orSignUpWith),
-                  SizedBox(height: CSizes.spaceBtwItems),
-                  CSocialButtons(),
+                  const SizedBox(height: CSizes.spaceBtwItems),
+                  const CSocialButtons(),
                 ],
               ),
             ),

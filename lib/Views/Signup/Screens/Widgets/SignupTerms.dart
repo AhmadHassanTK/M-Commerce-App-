@@ -29,7 +29,7 @@ class SignupTerms extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
           TextSpan(
-            text: '${CTexts.termsOfUse}',
+            text: CTexts.termsOfUse,
             style: Theme.of(context).textTheme.bodyMedium!.apply(
                   color: dark ? CColors.white : CColors.primary,
                   decoration: TextDecoration.underline,

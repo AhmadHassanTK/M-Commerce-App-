@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/constants/text_strings.dart';
 import 'package:shoes_app/utils/device/device_utility.dart';
@@ -32,10 +33,12 @@ class SuccessScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image(
-                  image: AssetImage(image),
-                  width: CHelperFunctions.screenWidth() * 0.6,
-                ),
+                // Image(
+                //   image: AssetImage(image),
+                //   width: CHelperFunctions.screenWidth() * 0.6,
+                // ),
+                Lottie.asset(image,
+                    width: CHelperFunctions.screenWidth() * 0.6),
                 const SizedBox(height: CSizes.spaceBtwSections),
                 Text(
                   title,

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "298873030090",
+    "project_id": "my-mcommerceapp-2024",
+    "storage_bucket": "my-mcommerceapp-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298873030090:android:fd275b272b3ae3df783b33",
+        "android_client_info": {
+          "package_name": "com.example.shoes_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298873030090-3ot290ovr45aqoiejqgnpgbr09013q0h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shoes_app",
+            "certificate_hash": "ead82dd61ea1afa9d388e37ff9c1a4636cbe893d"
+          }
+        },
+        {
+          "client_id": "298873030090-m82fslie0c1oi6udblh9ht2eccb5srku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB-l5r4ZBrxinIM8N6DcGR57i5Gc_R2Jc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298873030090-m82fslie0c1oi6udblh9ht2eccb5srku.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "298873030090-mfbnjtp2cktf9j15t3jdffui0iml62hf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.shoesApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
