@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_app/Models/Controller/UserController.dart';
 import 'package:shoes_app/Views/Cart/Cart.dart';
+import 'package:shoes_app/utils/shared/CShimmerEffect.dart';
 import 'package:shoes_app/utils/shared/CShoppingBagIcon.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/text_strings.dart';
@@ -11,6 +13,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return CAppBar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,11 +23,17 @@ class HomeAppBar extends StatelessWidget {
                   .textTheme
                   .labelMedium!
                   .apply(color: CColors.grey)),
-          Text(CTexts.homeAppbarSubTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .apply(color: CColors.white)),
+          Obx(() {
+            if (controller.profileLoading.value) {
+              return const CShimmerEffect(width: 80, height: 15);
+            } else {
+              return Text(controller.user.value.fullname,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .apply(color: CColors.white));
+            }
+          }),
         ],
       ),
       actions: [

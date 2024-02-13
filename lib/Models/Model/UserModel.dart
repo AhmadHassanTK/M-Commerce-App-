@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String id;
-  final String firstName;
-  final String lastName;
-  final String username;
+  String firstName;
+  String lastName;
+  String username;
   final String email;
   String phoneNumber;
   String profilePicture;
@@ -83,12 +83,12 @@ class UserModel {
   //   }
   // }
 
-  UserModel.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
-      : firstName = snapshot.data()['FirstName'],
-        lastName = snapshot.data()['LastName'],
-        username = snapshot.data()['Username'],
-        phoneNumber = snapshot.data()['PhoneNumber'],
-        profilePicture = snapshot.data()['ProfilePicture'],
-        id = snapshot.data()['id'],
-        email = snapshot.data()['Email'];
+  UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
+      : firstName = snapshot.data()!['FirstName'] ?? '',
+        lastName = snapshot.data()!['LastName'] ?? '',
+        username = snapshot.data()!['Username'] ?? '',
+        phoneNumber = snapshot.data()!['PhoneNumber'] ?? '',
+        profilePicture = snapshot.data()!['ProfilePicture'] ?? '',
+        id = snapshot.id,
+        email = snapshot.data()!['Email'] ?? '';
 }

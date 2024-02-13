@@ -6,12 +6,14 @@ class UserProfileTile extends StatelessWidget {
     super.key,
     required this.title,
     required this.midtitle,
+    this.onPressed,
     this.icon = const Icon(Iconsax.arrow_right_34),
   });
 
   final String title;
   final String midtitle;
   final Icon icon;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,7 +34,11 @@ class UserProfileTile extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        Expanded(child: icon),
+        Expanded(
+            child: GestureDetector(
+          onTap: onPressed,
+          child: icon,
+        )),
       ],
     );
   }

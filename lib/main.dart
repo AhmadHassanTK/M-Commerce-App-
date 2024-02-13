@@ -7,6 +7,7 @@ import 'package:shoes_app/firebase_options.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shoes_app/utils/Bindings/GeneralBinding.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
+import 'package:shoes_app/utils/shared/CAppRoutes.dart';
 import 'package:shoes_app/utils/theme/theme.dart';
 
 void main() async {
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       theme: CAppTheme.lightTheme,
       darkTheme: CAppTheme.darkTheme,
       initialBinding: GeneralBinding(),
+      getPages: CAppRoutes.pages,
       home: const Scaffold(
         backgroundColor: CColors.primary,
         body: Center(

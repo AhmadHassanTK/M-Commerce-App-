@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Controller/UserController.dart';
 import 'package:shoes_app/Views/Profile/widgets/UserProfile.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
@@ -13,6 +14,7 @@ class CUserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return ListTile(
       leading: const CRoundedImage(
         imageurl: CImages.user,
@@ -22,15 +24,17 @@ class CUserTile extends StatelessWidget {
         roundedborder: true,
         borderradius: 50,
       ),
-      title: Text(
-        'Coding with T',
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium!
-            .apply(color: CColors.white),
+      title: Obx(
+        () => Text(
+          controller.user.value.fullname,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .apply(color: CColors.white),
+        ),
       ),
       subtitle: Text(
-        'ahmadhassantk@gmail.com',
+        controller.user.value.email,
         style: Theme.of(context)
             .textTheme
             .labelMedium!

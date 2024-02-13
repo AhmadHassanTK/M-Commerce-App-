@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_app/Backend/AuthenticationRepository.dart';
-import 'package:shoes_app/DataBase/UserRepositery.dart';
-import 'package:shoes_app/Models/UserModel.dart';
+import 'package:shoes_app/DataBase/UserCloud.dart';
+import 'package:shoes_app/Models/Model/UserModel.dart';
 import 'package:shoes_app/Views/VerifyEmail/Screens/VerifyEmail.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/helpers/network_manager.dart';
@@ -63,7 +63,7 @@ class SignUpController extends GetxController {
         profilePicture: '',
       );
 
-      final userRepositery = Get.put(UserRepositery());
+      final userRepositery = Get.put(UserCloud());
       await userRepositery.saveUserRecords(newUser);
 
       CFullScreenLoader.stoploading();

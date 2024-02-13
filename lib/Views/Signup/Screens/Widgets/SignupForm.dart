@@ -23,6 +23,7 @@ class SignupForm extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
+                  autofocus: true,
                   controller: controller.firstname,
                   validator: (value) =>
                       CValidator.validateEmtyText('First name', value),
@@ -63,6 +64,7 @@ class SignupForm extends StatelessWidget {
           ),
           SizedBox(height: CSizes.spaceBtwItems),
           TextFormField(
+            keyboardType: TextInputType.emailAddress,
             controller: controller.email,
             validator: (value) => CValidator.validateEmail(value),
             expands: false,

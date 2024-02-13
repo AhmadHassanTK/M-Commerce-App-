@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:shoes_app/Views/Login/Controller/LoginController.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
@@ -10,6 +11,7 @@ class CSocialButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = LoginController.instance;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -19,7 +21,9 @@ class CSocialButtons extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await controller.GoogleSignIn();
+            },
             icon: Image(
               width: CSizes.iconLg,
               height: CSizes.iconLg,
