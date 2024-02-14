@@ -22,7 +22,7 @@ class CAppRoutes {
     GetPage(name: CRoutes.store, page: () => const StoreView()),
     GetPage(name: CRoutes.favourites, page: () => const WishListView()),
     GetPage(name: CRoutes.settings, page: () => const ProfileScreen()),
-    GetPage(name: CRoutes.productReviews, page: () => const ProductDetails()),
+    //  GetPage(name: CRoutes.productReviews, page: () => const ProductDetails()),
     GetPage(name: CRoutes.order, page: () => const OrdersScreen()),
     GetPage(name: CRoutes.checkout, page: () => const CheckoutView()),
     GetPage(name: CRoutes.cart, page: () => const CartView()),

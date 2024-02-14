@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Controller/ProductController.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
+import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
 
 class SortableProducts extends StatelessWidget {
   const SortableProducts({
@@ -11,6 +14,8 @@ class SortableProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
+
     return Column(
       children: [
         DropdownButtonFormField(
@@ -28,10 +33,27 @@ class SortableProducts extends StatelessWidget {
           ),
         ),
         const SizedBox(height: CSizes.spaceBtwSections),
-        const CGridView(
-          itemcount: 10,
-          child: CProductItemV(),
-        )
+        Obx(() {
+          if (productController.isloading.value) {
+            return const CVerticalShimmerEffect();
+          }
+          if (productController.allProducts.isEmpty) {
+            return Center(
+              child: Text(
+                'No Data Found!',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            );
+          }
+          return CGridView(
+            itemcount: productController.allProducts.length,
+            itembuilder: (context, index) {
+              return CProductItemV(
+                product: productController.allProducts[index],
+              );
+            },
+          );
+        })
       ],
     );
   }

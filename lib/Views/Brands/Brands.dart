@@ -30,9 +30,11 @@ class BrandsScreen extends StatelessWidget {
               CGridView(
                 itemcount: 12,
                 mainaxisextent: 80,
-                child: CProductContainer(
-                  onPressed: () => Get.to(() => const BrandProducts()),
-                ),
+                itembuilder: (context, index) {
+                  return CProductContainer(
+                    onPressed: () => Get.to(() => const BrandProducts()),
+                  );
+                },
               )
             ],
           ),

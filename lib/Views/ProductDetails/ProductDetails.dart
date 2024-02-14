@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
+import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/Views/ProductDetails/Widgets/ProductAttributes.dart';
 import 'package:shoes_app/Views/ProductDetails/Widgets/ProductBottomBar.dart';
 
@@ -14,7 +15,12 @@ import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+  const ProductDetails({
+    required this.product,
+    super.key,
+  });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

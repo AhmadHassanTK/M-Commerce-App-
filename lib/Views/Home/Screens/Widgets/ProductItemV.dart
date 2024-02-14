@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Controller/ProductController.dart';
+import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/Views/ProductDetails/ProductDetails.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
-import 'package:shoes_app/utils/constants/image_strings.dart';
+import 'package:shoes_app/utils/constants/enums.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CBoxshadow.dart';
@@ -16,15 +18,19 @@ class CProductItemV extends StatelessWidget {
   const CProductItemV({
     super.key,
     this.ontap,
+    required this.product,
   });
   final VoidCallback? ontap;
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     final dark = CHelperFunctions.isDarkMode(context);
-
+    final productcontroller = ProductController.instance;
+    final salePercentage =
+        productcontroller.salePercentage(product.price, product.saleprice);
     return GestureDetector(
       onTap: () {
-        Get.to(() => const ProductDetails());
+        Get.to(() => ProductDetails(product: product));
       },
       child: Container(
         width: 180,
@@ -42,8 +48,8 @@ class CProductItemV extends StatelessWidget {
               backgroundcolor: dark ? CColors.dark : CColors.light,
               child: Stack(
                 children: [
-                  const CRoundedImage(
-                    imageurl: CImages.productImage1,
+                  CRoundedImage(
+                    imageurl: product.thumbnail,
                     roundedborder: true,
                   ),
                   Positioned(
@@ -56,7 +62,7 @@ class CProductItemV extends StatelessWidget {
                         vertical: CSizes.xs,
                       ),
                       child: Text(
-                        '25%',
+                        '$salePercentage%',
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -86,17 +92,17 @@ class CProductItemV extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: CSizes.xs),
+            Padding(
+              padding: const EdgeInsets.only(left: CSizes.xs),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CProductTitleText(
-                    title: 'Green Nike Air Shoes',
+                    title: product.title,
                     smallsize: true,
                   ),
-                  SizedBox(height: CSizes.spaceBtwItems / 2),
-                  CVerifiedIconWithText(text: 'Nike'),
+                  const SizedBox(height: CSizes.spaceBtwItems / 2),
+                  CVerifiedIconWithText(text: product.brand!.name),
                 ],
               ),
             ),
@@ -104,13 +110,32 @@ class CProductItemV extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: CSizes.xs),
-                  child: Text(
-                    '\$35.0',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                Flexible(
+                  child: Column(
+                    children: [
+                      if (product.productType ==
+                              ProductType.single.toString() &&
+                          product.saleprice > 0)
+                        Padding(
+                          padding: const EdgeInsets.only(left: CSizes.xs),
+                          child: Text(
+                            product.price.toString(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .apply(decoration: TextDecoration.lineThrough),
+                          ),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: CSizes.xs),
+                        child: Text(
+                          productcontroller.getProductPrice(product),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(

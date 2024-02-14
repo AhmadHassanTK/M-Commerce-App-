@@ -5,13 +5,13 @@ class CGridView extends StatelessWidget {
   const CGridView({
     super.key,
     required this.itemcount,
-    required this.child,
     this.mainaxisextent = 288,
+    required this.itembuilder,
   });
 
   final int itemcount;
-  final Widget child;
   final double mainaxisextent;
+  final Widget? Function(BuildContext, int) itembuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,7 @@ class CGridView extends StatelessWidget {
         mainAxisSpacing: CSizes.gridViewSpacing,
         mainAxisExtent: mainaxisextent,
       ),
-      itemBuilder: (context, index) {
-        return child;
-      },
+      itemBuilder: itembuilder,
     );
   }
 }

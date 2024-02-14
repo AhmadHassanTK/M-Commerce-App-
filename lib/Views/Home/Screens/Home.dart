@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_app/Models/Controller/ProductController.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/CategoriesListView.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomeAppBar.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/HomePromoSlider.dart';
@@ -13,12 +14,14 @@ import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CPrimaryHeaderContainer.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
+import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -62,10 +65,27 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () => Get.to(() => ViewAllProductsScreen()),
               ),
             ),
-            CGridView(
-              itemcount: 4,
-              child: CProductItemV(),
-            )
+            Obx(() {
+              if (productController.isloading.value) {
+                return const CVerticalShimmerEffect();
+              }
+              if (productController.allProducts.isEmpty) {
+                return Center(
+                  child: Text(
+                    'No Data Found!',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                );
+              }
+              return CGridView(
+                itemcount: productController.allProducts.length,
+                itembuilder: (context, index) {
+                  return CProductItemV(
+                    product: productController.allProducts[index],
+                  );
+                },
+              );
+            })
           ],
         ),
       ),

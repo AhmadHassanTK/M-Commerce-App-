@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shoes_app/Models/Controller/ProductController.dart';
 import 'package:shoes_app/Models/Model/CategoryModel.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
@@ -6,6 +8,7 @@ import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CBrandShow.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
+import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
 
 class CategoryTab extends StatelessWidget {
   const CategoryTab({
@@ -16,30 +19,49 @@ class CategoryTab extends StatelessWidget {
   final CategoryModel category;
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
+
     return ListView(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
+        children: [
           Padding(
-            padding: EdgeInsets.all(CSizes.defaultSpace),
+            padding: const EdgeInsets.all(CSizes.defaultSpace),
             child: Column(
               children: [
-                CBrandShow(images: [
+                const CBrandShow(images: [
                   CImages.productImage1,
                   CImages.productImage2,
                   CImages.productImage3
                 ]),
-                CBrandShow(images: [
+                const CBrandShow(images: [
                   CImages.productImage1,
                   CImages.productImage2,
                   CImages.productImage3
                 ]),
-                CSectionTitle(title: 'You might like'),
-                SizedBox(height: CSizes.spaceBtwItems),
-                CGridView(
-                  itemcount: 4,
-                  child: CProductItemV(),
-                ),
+                const CSectionTitle(title: 'You might like'),
+                const SizedBox(height: CSizes.spaceBtwItems),
+                Obx(() {
+                  if (productController.isloading.value) {
+                    return const CVerticalShimmerEffect();
+                  }
+                  if (productController.allProducts.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No Data Found!',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    );
+                  }
+                  return CGridView(
+                    itemcount: productController.allProducts.length,
+                    itembuilder: (context, index) {
+                      return CProductItemV(
+                        product: productController.allProducts[index],
+                      );
+                    },
+                  );
+                })
               ],
             ),
           ),

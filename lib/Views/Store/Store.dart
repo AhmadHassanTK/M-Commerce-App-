@@ -65,10 +65,12 @@ class StoreView extends StatelessWidget {
                           onPressed: () => Get.to(() => const BrandsScreen()),
                         ),
                         const SizedBox(height: CSizes.spaceBtwItems / 2),
-                        const CGridView(
+                        CGridView(
                           itemcount: 4,
                           mainaxisextent: 80,
-                          child: CProductContainer(),
+                          itembuilder: (context, index) {
+                            return const CProductContainer();
+                          },
                         ),
                       ],
                     ),
