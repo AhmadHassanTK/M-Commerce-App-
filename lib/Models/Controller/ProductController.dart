@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:shoes_app/DataBase/ProductsCloud.dart';
 import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/utils/constants/enums.dart';
 import 'package:shoes_app/utils/loaders/Loaders.dart';
@@ -8,7 +9,7 @@ class ProductController extends GetxController {
 
   RxList<ProductModel> allProducts = <ProductModel>[].obs;
   final isloading = false.obs;
-  final productcloud = Get.put(ProductController());
+  final productcloud = Get.put(ProductsCloud());
 
   @override
   void onInit() {
@@ -20,11 +21,13 @@ class ProductController extends GetxController {
     try {
       isloading.value = true;
 
-      final products = await productcloud.fetchAllProducts();
+      final products = await productcloud.getFeaturedProducts();
 
       allProducts.assignAll(products);
     } catch (e) {
-      CLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      CLoaders.errorSnackbar(
+          title: 'Oh Snap in productController!', message: e.toString());
+      print(e.toString());
     } finally {
       isloading.value = false;
     }

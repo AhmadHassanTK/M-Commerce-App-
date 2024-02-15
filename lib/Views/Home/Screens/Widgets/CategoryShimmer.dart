@@ -20,9 +20,10 @@ class CCategoryShimmer extends StatelessWidget {
         itemBuilder: (context, index) {
           return const Column(
             children: [
-              CShimmerEffect(width: 55, height: 55, radius: 55),
+              Flexible(
+                  child: CShimmerEffect(width: 55, height: 55, radius: 55)),
               SizedBox(height: CSizes.spaceBtwItems / 2),
-              CShimmerEffect(width: 55, height: 55),
+              Flexible(child: CShimmerEffect(width: 55, height: 55)),
             ],
           );
         },

@@ -43,7 +43,8 @@ class ProductVariationModel {
         image = snapshot['Image'] ?? '',
         stock = snapshot['Stock'] ?? 0,
         sku = snapshot['SKU'] ?? '',
-        attributesValues = Map<String, String>.from(snapshot['Attributes']),
+        attributesValues =
+            Map<String, String>.from(snapshot['AttributesValues'] ?? ''),
         description = snapshot['Description'] ?? '',
         id = snapshot['Id'] ?? '';
 }

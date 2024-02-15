@@ -88,40 +88,41 @@ class ProductModel {
         images = snapshot.data()!['Images'] != null
             ? List<String>.from(snapshot.data()!['Images'])
             : [],
-        productAttributes =
-            (snapshot.data()!['ProductsAttributes'] as List<dynamic>)
+        productAttributes = snapshot.data()!['ProductsAttributes'] != null
+            ? (snapshot.data()!['ProductsAttributes'] as List<dynamic>)
                 .map((e) => ProductAtributeModel.fromJson(e))
-                .toList(),
-        productVariation =
-            (snapshot.data()!['ProductsVariations'] as List<dynamic>)
-                .map((e) => ProductVariationModel.fromJson(e))
-                .toList(),
-        brand = BrandModel.fromJson(snapshot.data()!['Brand'] ?? '');
-
-  ProductModel.fromQuerySnapshot(
-      QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
-      : sku = snapshot.data()['SKU'] ?? '',
-        id = snapshot.id,
-        title = snapshot.data()['Title'] ?? '',
-        stock = snapshot.data()['Stock'] ?? 0,
-        price = double.parse((snapshot.data()['Price'] ?? 0.0).toString()),
-        saleprice =
-            double.parse((snapshot.data()['SalePrice'] ?? 0.0).toString()),
-        isFeatured = snapshot.data()['IsFeatured'] ?? false,
-        thumbnail = snapshot.data()['Thumbnail'] ?? '',
-        categoryid = snapshot.data()['CategoryId'] ?? '',
-        description = snapshot.data()['Description'] ?? '',
-        productType = snapshot.data()['ProductType'] ?? '',
-        images = snapshot.data()['Images'] != null
-            ? List<String>.from(snapshot.data()['Images'])
+                .toList()
             : [],
-        productAttributes =
-            (snapshot.data()['ProductsAttributes'] as List<dynamic>)
-                .map((e) => ProductAtributeModel.fromJson(e))
-                .toList(),
-        productVariation =
-            (snapshot.data()['ProductsVariations'] as List<dynamic>)
+        productVariation = snapshot.data()!['ProductsVariations'] != null
+            ? (snapshot.data()!['ProductsVariations'] as List<dynamic>)
                 .map((e) => ProductVariationModel.fromJson(e))
-                .toList(),
-        brand = BrandModel.fromJson(snapshot.data()['Brand'] ?? '');
+                .toList()
+            : [],
+        brand = BrandModel.fromJson(snapshot.data()!['Brand']);
+
+  factory ProductModel.fromQuerySnapshot(
+      QueryDocumentSnapshot<Object?> snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
+    return ProductModel(
+      sku: data['SKU'] ?? '',
+      id: snapshot.id,
+      title: data['Title'] ?? '',
+      stock: data['Stock'] ?? 0,
+      price: double.parse((data['Price'] ?? 0.0).toString()),
+      saleprice: double.parse((data['SalePrice'] ?? 0.0).toString()),
+      isFeatured: data['IsFeatured'] ?? false,
+      thumbnail: data['Thumbnail'] ?? '',
+      categoryid: data['CategoryId'] ?? '',
+      description: data['Description'] ?? '',
+      productType: data['ProductType'] ?? '',
+      images: data['Images'] != null ? List<String>.from(data['Images']) : [],
+      productAttributes: (data['ProductsAttributes'] as List<dynamic>)
+          .map((e) => ProductAtributeModel.fromJson(e))
+          .toList(),
+      productVariation: (data['ProductsVariations'] as List<dynamic>)
+          .map((e) => ProductVariationModel.fromJson(e))
+          .toList(),
+      brand: BrandModel.fromJson(data['Brand'] ?? ''),
+    );
+  }
 }

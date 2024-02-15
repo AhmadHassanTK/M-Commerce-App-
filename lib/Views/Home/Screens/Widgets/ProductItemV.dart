@@ -44,6 +44,7 @@ class CProductItemV extends StatelessWidget {
           children: [
             CRoundedContainer(
               height: 180,
+              width: 180,
               padding: const EdgeInsets.all(CSizes.sm),
               backgroundcolor: dark ? CColors.dark : CColors.light,
               child: Stack(
@@ -51,6 +52,7 @@ class CProductItemV extends StatelessWidget {
                   CRoundedImage(
                     imageurl: product.thumbnail,
                     roundedborder: true,
+                    isNetworkImage: true,
                   ),
                   Positioned(
                     top: 10,

@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:shoes_app/Backend/FirebaseStorageServices.dart';
 import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/utils/constants/enums.dart';
+import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/exceptions/firebase_exceptions.dart';
 import 'package:shoes_app/utils/exceptions/format_exceptions.dart';
 import 'package:shoes_app/utils/exceptions/platform_exceptions.dart';
+import 'package:shoes_app/utils/loaders/FullScreenLoader.dart';
 import 'package:shoes_app/utils/loaders/Loaders.dart';
 
 class ProductsCloud extends GetxController {
@@ -29,12 +31,15 @@ class ProductsCloud extends GetxController {
     } on PlatformException catch (e) {
       throw CPlatformException(e.code).message;
     } catch (e) {
+      print(e.toString());
       throw 'Something went wrong, Please try again';
     }
   }
 
   Future<void> uploadDummyData(List<ProductModel> products) async {
     try {
+      CFullScreenLoader.openLoadingDialog(
+          'uploading the products', CImages.dockeranimation);
       final storage = Get.put(FirebaseStorageServices());
 
       for (var product in products) {
@@ -83,6 +88,8 @@ class ProductsCloud extends GetxController {
       throw CPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong, Please try again';
+    } finally {
+      CFullScreenLoader.stoploading();
     }
   }
 }

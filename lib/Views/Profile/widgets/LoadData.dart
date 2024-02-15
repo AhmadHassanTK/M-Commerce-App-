@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/DataBase/BannerCloud.dart';
 import 'package:shoes_app/DataBase/CategoryCloud.dart';
 import 'package:shoes_app/DataBase/DummyData.dart';
+import 'package:shoes_app/DataBase/ProductsCloud.dart';
 import 'package:shoes_app/Views/Profile/widgets/LoadDataTile.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
@@ -16,6 +18,7 @@ class LoadDataScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final categorycloud = CategoryCloud.instance;
     final bannercloud = BannerCloud.instance;
+    final productcloud = Get.put(ProductsCloud());
     return Scaffold(
       appBar: const CAppBar(
         title: Text('Upload Data'),
@@ -40,8 +43,6 @@ class LoadDataScreen extends StatelessWidget {
                     ),
                     title: 'Upload Categories',
                     onPressed: () async {
-                      print('pressed');
-
                       await categorycloud.uploadDummyData(DummyData.categories);
                     },
                   ),
@@ -52,12 +53,15 @@ class LoadDataScreen extends StatelessWidget {
                     ),
                     title: 'Upload Brands',
                   ),
-                  const LoadDataTile(
-                    leadingIcon: Icon(
+                  LoadDataTile(
+                    leadingIcon: const Icon(
                       Iconsax.shopping_cart,
                       color: CColors.primary,
                     ),
                     title: 'Upload Products',
+                    onPressed: () async {
+                      await productcloud.uploadDummyData(DummyData.products);
+                    },
                   ),
                   LoadDataTile(
                     leadingIcon: const Icon(
@@ -66,8 +70,6 @@ class LoadDataScreen extends StatelessWidget {
                     ),
                     title: 'Upload Banners',
                     onPressed: () async {
-                      print('pressed');
-
                       await bannercloud.uploadDummyData(DummyData.banners);
                     },
                   ),

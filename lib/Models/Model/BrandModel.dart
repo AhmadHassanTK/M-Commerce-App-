@@ -28,7 +28,7 @@ class BrandModel {
   BrandModel.fromJson(Map<String, dynamic> snapshot)
       : name = snapshot['Name'] ?? '',
         image = snapshot['Image'] ?? '',
-        productsCount = snapshot['ProductsCount'] ?? '',
+        productsCount = snapshot['ProductsCount'] ?? 0,
         isfeatured = snapshot['IsFeatured'] ?? false,
         id = snapshot['Id'] ?? '';
 }

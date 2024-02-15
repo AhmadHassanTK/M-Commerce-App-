@@ -65,27 +65,30 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () => Get.to(() => ViewAllProductsScreen()),
               ),
             ),
-            Obx(() {
-              if (productController.isloading.value) {
-                return const CVerticalShimmerEffect();
-              }
-              if (productController.allProducts.isEmpty) {
-                return Center(
-                  child: Text(
-                    'No Data Found!',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                );
-              }
-              return CGridView(
-                itemcount: productController.allProducts.length,
-                itembuilder: (context, index) {
-                  return CProductItemV(
-                    product: productController.allProducts[index],
+            Padding(
+              padding: const EdgeInsets.all(CSizes.defaultSpace),
+              child: Obx(() {
+                if (productController.isloading.value) {
+                  return const CVerticalShimmerEffect();
+                }
+                if (productController.allProducts.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No Data Found!',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   );
-                },
-              );
-            })
+                }
+                return CGridView(
+                  itemcount: productController.allProducts.length,
+                  itembuilder: (context, index) {
+                    return CProductItemV(
+                      product: productController.allProducts[index],
+                    );
+                  },
+                );
+              }),
+            )
           ],
         ),
       ),
