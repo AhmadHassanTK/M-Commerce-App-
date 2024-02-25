@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_app/Models/Controller/ProductController.dart';
@@ -62,7 +63,15 @@ class HomeScreen extends StatelessWidget {
               child: CSectionTitle(
                 title: 'Popular Products',
                 showactionbutton: true,
-                onPressed: () => Get.to(() => ViewAllProductsScreen()),
+                onPressed: () => Get.to(() => ViewAllProductsScreen(
+                      title: 'Popular Products',
+                      query: FirebaseFirestore.instance
+                          .collection('Products')
+                          .where('isFeatured', isEqualTo: true)
+                          .limit(6),
+                      futuremethod:
+                          productController.fetchAllFeaturedProducts(),
+                    )),
               ),
             ),
             Padding(

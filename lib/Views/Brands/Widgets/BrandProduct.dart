@@ -20,7 +20,7 @@ class BrandProducts extends StatelessWidget {
             children: [
               CProductContainer(),
               SizedBox(height: CSizes.spaceBtwSections),
-              SortableProducts(),
+              SortableProducts(products: []),
             ],
           ),
         ),

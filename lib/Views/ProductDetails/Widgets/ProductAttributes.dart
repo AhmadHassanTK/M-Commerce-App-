@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shoes_app/Models/Model/ProductModel.dart';
+import 'package:shoes_app/Views/ProductDetails/Controller/VariationController.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
@@ -11,117 +14,134 @@ import 'package:shoes_app/utils/shared/CSectionTitle.dart';
 class ProductAttributes extends StatelessWidget {
   const ProductAttributes({
     super.key,
+    required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = CHelperFunctions.isDarkMode(context);
-
-    return Column(
-      children: [
-        CRoundedContainer(
-          backgroundcolor: dark ? CColors.darkGrey : CColors.grey,
-          padding: const EdgeInsets.all(CSizes.md),
-          margin: const EdgeInsets.all(CSizes.md),
-          radius: 20,
-          child: Column(
-            children: [
-              Row(
+    final controller = Get.put(VariationController());
+    return Obx(
+      () => Column(
+        children: [
+          if (controller.selectedVariationG.value.id.isNotEmpty)
+            CRoundedContainer(
+              backgroundcolor: dark ? CColors.darkGrey : CColors.grey,
+              padding: const EdgeInsets.all(CSizes.md),
+              margin: const EdgeInsets.all(CSizes.md),
+              radius: 20,
+              child: Column(
                 children: [
-                  const CSectionTitle(
-                    title: 'Variation',
-                    showactionbutton: false,
-                  ),
-                  const SizedBox(width: CSizes.md),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          const CProductTitleText(
-                              title: 'price :', smallsize: true),
-                          const SizedBox(width: CSizes.sm),
-                          Text(
-                            '\$25',
-                            style:
-                                Theme.of(context).textTheme.titleSmall!.apply(
-                                      decoration: TextDecoration.lineThrough,
-                                    ),
-                          ),
-                          const SizedBox(width: CSizes.spaceBtwItems),
-                          const CProductPriceText(price: '20')
-                        ],
+                      const CSectionTitle(
+                        title: 'Variation',
+                        showactionbutton: false,
                       ),
-                      Row(
+                      const SizedBox(width: CSizes.md),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const CProductTitleText(
-                              title: 'Stock :', smallsize: true),
-                          const SizedBox(width: CSizes.sm),
-                          Text(
-                            'In Stock',
-                            style: Theme.of(context).textTheme.titleMedium,
+                          Row(
+                            children: [
+                              const CProductTitleText(
+                                  title: 'price :', smallsize: true),
+                              const SizedBox(width: CSizes.sm),
+                              if (controller
+                                      .selectedVariationG.value.salePrice >
+                                  0)
+                                Text(
+                                  '\$${controller.selectedVariationG.value.price}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .apply(
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                ),
+                              const SizedBox(width: CSizes.spaceBtwItems),
+                              CProductPriceText(
+                                price: controller.getVariationPrice(),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const CProductTitleText(
+                                  title: 'Stock :', smallsize: true),
+                              const SizedBox(width: CSizes.sm),
+                              Text(
+                                controller.variationstockstatue.value,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
                           ),
                         ],
-                      ),
+                      )
                     ],
+                  ),
+                  const SizedBox(height: CSizes.spaceBtwItems / 2),
+                  CProductTitleText(
+                    title:
+                        controller.selectedVariationG.value.description ?? '',
+                    maxlines: 4,
+                    smallsize: true,
                   )
                 ],
               ),
-              const SizedBox(height: CSizes.spaceBtwItems / 2),
-              const CProductTitleText(
-                title:
-                    'This is the description of the Product and it can go up to max 4 lines',
-                maxlines: 4,
-                smallsize: true,
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CSectionTitle(title: 'Colors', showactionbutton: false),
-                  const SizedBox(height: CSizes.spaceBtwItems / 2),
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      CChoiceChip(
-                          text: 'Green', selected: true, onselected: (v) {}),
-                      CChoiceChip(
-                          text: 'Blue', selected: false, onselected: (v) {}),
-                      CChoiceChip(
-                          text: 'Red', selected: false, onselected: (v) {})
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: CSizes.spaceBtwItems),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CSectionTitle(title: 'Sizes', showactionbutton: false),
-                  const SizedBox(height: CSizes.spaceBtwItems / 2),
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      CChoiceChip(
-                          text: 'EU 34', selected: false, onselected: (v) {}),
-                      CChoiceChip(
-                          text: 'EU 36', selected: true, onselected: (v) {}),
-                      CChoiceChip(
-                          text: 'EU 38', selected: false, onselected: (v) {})
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-        )
-      ],
+            ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
+            child: Column(
+                children: product.productAttributes!
+                    .map(
+                      (attribute) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CSectionTitle(
+                              title: attribute.name ?? '',
+                              showactionbutton: false),
+                          const SizedBox(height: CSizes.spaceBtwItems / 2),
+                          Obx(
+                            () => Wrap(
+                              spacing: 8,
+                              children: attribute.values!.map((attributeValue) {
+                                final isSelected = controller
+                                        .selectedAttriutesM[attribute.name] ==
+                                    attributeValue;
+                                final avaliable = controller
+                                    .getAttributesAvailabilityInVariation(
+                                        product.productVariation!,
+                                        attribute.name!)
+                                    .contains(attributeValue);
+                                return CChoiceChip(
+                                  text: attributeValue,
+                                  selected: isSelected,
+                                  onselected: avaliable
+                                      ? (selected) {
+                                          if (selected && avaliable) {
+                                            controller.onAttributeSelection(
+                                              product,
+                                              attribute.name ?? '',
+                                              attributeValue,
+                                            );
+                                          }
+                                        }
+                                      : null,
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                    .toList()),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_app/Models/Controller/ProductController.dart';
 import 'package:shoes_app/Models/Model/CategoryModel.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
+import 'package:shoes_app/Views/ViewAllProducts/ViewAllProducts.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CBrandShow.dart';
@@ -39,7 +41,17 @@ class CategoryTab extends StatelessWidget {
                   CImages.productImage2,
                   CImages.productImage3
                 ]),
-                const CSectionTitle(title: 'You might like'),
+                CSectionTitle(
+                  title: 'You might like',
+                  onPressed: () => Get.to(ViewAllProductsScreen(
+                    title: 'Popular Products',
+                    query: FirebaseFirestore.instance
+                        .collection('Products')
+                        .where('isFeatured', isEqualTo: true)
+                        .limit(6),
+                    futuremethod: productController.fetchAllFeaturedProducts(),
+                  )),
+                ),
                 const SizedBox(height: CSizes.spaceBtwItems),
                 Obx(() {
                   if (productController.isloading.value) {

@@ -10,6 +10,7 @@ import 'package:shoes_app/Views/ProductDetails/Widgets/ProductBottomBar.dart';
 import 'package:shoes_app/Views/ProductDetails/Widgets/ProductMetaData.dart';
 import 'package:shoes_app/Views/ProductDetails/Widgets/UpperContainer.dart';
 import 'package:shoes_app/Views/Reviews&Rating/Reviews&Rating.dart';
+import 'package:shoes_app/utils/constants/enums.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
@@ -30,10 +31,12 @@ class ProductDetails extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              UpperContainer(),
-              ProductMetaData(),
-              ProductAttributes(),
-              SizedBox(height: CSizes.spaceBtwItems),
+              UpperContainer(product: product),
+              ProductMetaData(product: product),
+              if (product.productType == ProductType.variable.toString())
+                ProductAttributes(product: product),
+              if (product.productType == ProductType.variable.toString())
+                SizedBox(height: CSizes.spaceBtwItems),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
@@ -53,7 +56,7 @@ class ProductDetails extends StatelessWidget {
                     ),
                     SizedBox(height: CSizes.spaceBtwItems),
                     ReadMoreText(
-                      'Amazon went public in May 1997. It began selling music and videos in 1998, and began international operations by acquiring online sellers of books in the United Kingdom and Germany. In the subsequent year, it initiated the sale of a diverse range of products, including music, video games, consumer electronics, home improvement items, software, games, and toys',
+                      product.description ?? '',
                       trimLines: 2,
                       trimMode: TrimMode.Line,
                       trimCollapsedText: ' Show more',

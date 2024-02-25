@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Controller/ProductController.dart';
+import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
-import 'package:shoes_app/utils/constants/image_strings.dart';
+import 'package:shoes_app/utils/constants/enums.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CProductTitleText.dart';
@@ -11,12 +13,17 @@ import 'package:shoes_app/utils/shared/CRoundedImage.dart';
 class ProductMetaData extends StatelessWidget {
   const ProductMetaData({
     super.key,
+    required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = CHelperFunctions.isDarkMode(context);
-
+    final productController = ProductController.instance;
+    final salePercentage =
+        productController.salePercentage(product.price, product.saleprice);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
       child: Column(
@@ -56,7 +63,7 @@ class ProductMetaData extends StatelessWidget {
                   vertical: CSizes.xs,
                 ),
                 child: Text(
-                  '25%',
+                  '$salePercentage%',
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge!
@@ -64,26 +71,31 @@ class ProductMetaData extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: CSizes.spaceBtwItems),
-              Text(
-                '\$250',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .apply(decoration: TextDecoration.lineThrough),
-              ),
-              const SizedBox(width: CSizes.spaceBtwItems),
-              Text('\$175', style: Theme.of(context).textTheme.titleLarge!)
+              if (product.productType == ProductType.single.toString() &&
+                  product.saleprice > 0)
+                Text(
+                  '\$${product.price}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .apply(decoration: TextDecoration.lineThrough),
+                ),
+              if (product.productType == ProductType.single.toString() &&
+                  product.saleprice > 0)
+                const SizedBox(width: CSizes.spaceBtwItems),
+              Text('\$${productController.getProductPrice(product)}',
+                  style: Theme.of(context).textTheme.titleLarge!)
             ],
           ),
           const SizedBox(width: CSizes.spaceBtwItems),
-          const CProductTitleText(title: 'Green Nike Sports Shirt'),
+          CProductTitleText(title: product.title),
           const SizedBox(width: CSizes.spaceBtwItems / 1.5),
           Row(
             children: [
               const CProductTitleText(title: 'Status'),
               const SizedBox(width: CSizes.spaceBtwItems),
               Text(
-                'In Stock',
+                productController.stockStatue(product.stock),
                 style: Theme.of(context).textTheme.titleMedium,
               )
             ],
@@ -91,14 +103,14 @@ class ProductMetaData extends StatelessWidget {
           Row(
             children: [
               CRoundedImage(
-                imageurl: CImages.nikeLogo,
+                imageurl: product.brand != null ? product.brand!.image : '',
                 height: 32,
                 width: 32,
                 backgroundcolor: dark ? CColors.dark : CColors.light,
               ),
               const SizedBox(width: CSizes.spaceBtwItems),
               Text(
-                'Nike',
+                product.brand != null ? product.brand!.name : '',
                 style: Theme.of(context).textTheme.titleLarge,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,

@@ -7,7 +7,7 @@ import 'package:shoes_app/Views/Home/Screens/Home.dart';
 import 'package:shoes_app/Views/Login/Screens/Login.dart';
 import 'package:shoes_app/Views/OnBoarding/Screen/OnBoarding.dart';
 import 'package:shoes_app/Views/Orders/Orders.dart';
-import 'package:shoes_app/Views/ProductDetails/ProductDetails.dart';
+//import 'package:shoes_app/Views/ProductDetails/ProductDetails.dart';
 import 'package:shoes_app/Views/Profile/Profile.dart';
 import 'package:shoes_app/Views/Profile/widgets/UserProfile.dart';
 import 'package:shoes_app/Views/Signup/Screens/Signup.dart';

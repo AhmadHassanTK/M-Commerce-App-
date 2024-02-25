@@ -21,6 +21,7 @@ class ProductsCloud extends GetxController {
       final documents = await db
           .collection('Products')
           .where('IsFeatured', isEqualTo: true)
+          .limit(4)
           .get();
 
       return documents.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
@@ -32,6 +33,44 @@ class ProductsCloud extends GetxController {
       throw CPlatformException(e.code).message;
     } catch (e) {
       print(e.toString());
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<List<ProductModel>> getAllFeaturedProducts() async {
+    try {
+      final documents = await db
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
+          .get();
+
+      return documents.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw CFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const CFormatException();
+    } on PlatformException catch (e) {
+      throw CPlatformException(e.code).message;
+    } catch (e) {
+      print(e.toString());
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
+    try {
+      final querySnapshot = await query.get();
+      final List<ProductModel> productsList = querySnapshot.docs
+          .map((e) => ProductModel.fromQuerySnapshot(e))
+          .toList();
+      return productsList;
+    } on FirebaseException catch (e) {
+      throw CFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const CFormatException();
+    } on PlatformException catch (e) {
+      throw CPlatformException(e.code).message;
+    } catch (e) {
       throw 'Something went wrong, Please try again';
     }
   }

@@ -13,11 +13,11 @@ class ProductController extends GetxController {
 
   @override
   void onInit() {
-    fetchAllProducts();
+    fetchFeaturedProducts();
     super.onInit();
   }
 
-  fetchAllProducts() async {
+  fetchFeaturedProducts() async {
     try {
       isloading.value = true;
 
@@ -27,9 +27,19 @@ class ProductController extends GetxController {
     } catch (e) {
       CLoaders.errorSnackbar(
           title: 'Oh Snap in productController!', message: e.toString());
-      print(e.toString());
     } finally {
       isloading.value = false;
+    }
+  }
+
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      final products = await productcloud.getAllFeaturedProducts();
+
+      return products;
+    } catch (e) {
+      CLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      return [];
     }
   }
 
