@@ -54,24 +54,25 @@ class CProductItemV extends StatelessWidget {
                     roundedborder: true,
                     isNetworkImage: true,
                   ),
-                  Positioned(
-                    top: 10,
-                    child: CRoundedContainer(
-                      radius: CSizes.sm,
-                      backgroundcolor: CColors.secondary.withOpacity(0.8),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: CSizes.sm,
-                        vertical: CSizes.xs,
-                      ),
-                      child: Text(
-                        '$salePercentage%',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge!
-                            .apply(color: CColors.black),
+                  if (salePercentage != null)
+                    Positioned(
+                      top: 10,
+                      child: CRoundedContainer(
+                        radius: CSizes.sm,
+                        backgroundcolor: CColors.secondary.withOpacity(0.8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: CSizes.sm,
+                          vertical: CSizes.xs,
+                        ),
+                        child: Text(
+                          '$salePercentage%',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .apply(color: CColors.black),
+                        ),
                       ),
                     ),
-                  ),
                   Positioned(
                     right: 0,
                     child: Container(

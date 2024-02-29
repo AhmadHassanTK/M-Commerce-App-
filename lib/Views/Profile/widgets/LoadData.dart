@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/DataBase/BannerCloud.dart';
+import 'package:shoes_app/DataBase/BrandCloud.dart';
 import 'package:shoes_app/DataBase/CategoryCloud.dart';
 import 'package:shoes_app/DataBase/DummyData.dart';
 import 'package:shoes_app/DataBase/ProductsCloud.dart';
@@ -19,6 +20,7 @@ class LoadDataScreen extends StatelessWidget {
     final categorycloud = CategoryCloud.instance;
     final bannercloud = BannerCloud.instance;
     final productcloud = Get.put(ProductsCloud());
+    final brandcloud = Get.put(BrandCloud());
     return Scaffold(
       appBar: const CAppBar(
         title: Text('Upload Data'),
@@ -46,12 +48,15 @@ class LoadDataScreen extends StatelessWidget {
                       await categorycloud.uploadDummyData(DummyData.categories);
                     },
                   ),
-                  const LoadDataTile(
-                    leadingIcon: Icon(
+                  LoadDataTile(
+                    leadingIcon: const Icon(
                       Iconsax.shop,
                       color: CColors.primary,
                     ),
                     title: 'Upload Brands',
+                    onPressed: () async {
+                      await brandcloud.uploadDummyData(DummyData.brands);
+                    },
                   ),
                   LoadDataTile(
                     leadingIcon: const Icon(

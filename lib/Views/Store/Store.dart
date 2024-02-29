@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_app/Models/Controller/BrandController.dart';
 import 'package:shoes_app/Models/Controller/CategoryController.dart';
 import 'package:shoes_app/Views/Brands/Brands.dart';
+import 'package:shoes_app/Views/Brands/Widgets/BrandProduct.dart';
 import 'package:shoes_app/Views/Store/Widgets/CategoryTab.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
+import 'package:shoes_app/utils/shared/CBrandShimmer.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CProductContainer.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
@@ -21,6 +24,7 @@ class StoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     final isdark = CHelperFunctions.isDarkMode(context);
     final categories = CategoryController.instance.featuredCategories;
+    final brandcontroller = Get.put(BrandController());
     return DefaultTabController(
       length: categories.length,
       child: SafeArea(
@@ -65,13 +69,38 @@ class StoreView extends StatelessWidget {
                           onPressed: () => Get.to(() => const BrandsScreen()),
                         ),
                         const SizedBox(height: CSizes.spaceBtwItems / 2),
-                        CGridView(
-                          itemcount: 4,
-                          mainaxisextent: 80,
-                          itembuilder: (context, index) {
-                            return const CProductContainer();
-                          },
-                        ),
+                        Obx(() {
+                          if (brandcontroller.isloading.value) {
+                            return const CBrandShimmer();
+                          }
+
+                          if (brandcontroller.featuredBrands.isEmpty) {
+                            return Center(
+                              child: Text(
+                                'No Data Found',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .apply(color: Colors.white),
+                              ),
+                            );
+                          }
+
+                          return CGridView(
+                            itemcount: brandcontroller.featuredBrands.length,
+                            mainaxisextent: 80,
+                            itembuilder: (context, index) {
+                              final brand =
+                                  brandcontroller.featuredBrands[index];
+                              return CProductContainer(
+                                showBorder: true,
+                                brand: brand,
+                                onPressed: () =>
+                                    Get.to(() => BrandProducts(brand: brand)),
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),

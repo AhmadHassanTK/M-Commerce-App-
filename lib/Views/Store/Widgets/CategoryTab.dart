@@ -31,11 +31,13 @@ class CategoryTab extends StatelessWidget {
             padding: const EdgeInsets.all(CSizes.defaultSpace),
             child: Column(
               children: [
-                const CBrandShow(images: [
-                  CImages.productImage1,
-                  CImages.productImage2,
-                  CImages.productImage3
-                ]),
+                const CBrandShow(
+                  images: [
+                    CImages.productImage1,
+                    CImages.productImage2,
+                    CImages.productImage3
+                  ],
+                ),
                 const CBrandShow(images: [
                   CImages.productImage1,
                   CImages.productImage2,

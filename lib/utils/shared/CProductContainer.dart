@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Model/BrandModel.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
-import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CRoundedContainer.dart';
+import 'package:shoes_app/utils/shared/CRoundedImage.dart';
 
 class CProductContainer extends StatelessWidget {
   const CProductContainer({
     super.key,
     this.onPressed,
+    required this.showBorder,
+    required this.brand,
   });
 
   final VoidCallback? onPressed;
+  final bool showBorder;
+  final BrandModel brand;
   @override
   Widget build(BuildContext context) {
+    final isdark = CHelperFunctions.isDarkMode(context);
+
     return GestureDetector(
       onTap: onPressed,
       child: CRoundedContainer(
@@ -33,15 +40,14 @@ class CProductContainer extends StatelessWidget {
                       : CColors.white,
                   borderRadius: BorderRadius.circular(100),
                 ),
-                child: Image(
-                  image: const AssetImage(CImages.clothIcon),
-                  color: CHelperFunctions.isDarkMode(context)
-                      ? CColors.white
-                      : CColors.black,
+                child: CRoundedImage(
+                  imageurl: brand.image,
+                  isNetworkImage: brand != BrandModel.empty() ? true : false,
+                  backgroundcolor: Colors.transparent,
+                  overlaycolor: isdark ? CColors.white : CColors.black,
                 ),
               ),
             ),
-            const SizedBox(width: CSizes.spaceBtwItems / 2),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -49,11 +55,13 @@ class CProductContainer extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        'Nike',
-                        style: Theme.of(context).textTheme.titleLarge,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                      Flexible(
+                        child: Text(
+                          brand.name,
+                          style: Theme.of(context).textTheme.titleLarge,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
                       const SizedBox(width: CSizes.xs),
                       const Icon(
@@ -64,7 +72,7 @@ class CProductContainer extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    '256 products',
+                    '${brand.productsCount ?? 0} products',
                     style: Theme.of(context).textTheme.labelMedium,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

@@ -5,6 +5,7 @@ import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/Views/ViewAllProducts/Controller/AllProductsController.dart';
 import 'package:shoes_app/Views/ViewAllProducts/Widgets/SortableProducts.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
+import 'package:shoes_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
 import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
 
@@ -34,19 +35,12 @@ class ViewAllProductsScreen extends StatelessWidget {
           child: FutureBuilder(
               future: futuremethod ?? controller.fetchProductsByQuery(query),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CVerticalShimmerEffect();
-                }
+                final widget = CCloudHelperFunctions.checkMultiRecordState(
+                  snapshot: snapshot,
+                  loader: const CVerticalShimmerEffect(),
+                );
 
-                if (snapshot.hasData ||
-                    snapshot.data == null ||
-                    snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No Data Found!'));
-                }
-
-                if (snapshot.hasError) {
-                  return const Center(child: Text('Something went wrong!'));
-                }
+                if (widget != null) return widget;
 
                 final products = snapshot.data;
 

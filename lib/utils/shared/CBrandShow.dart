@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_app/Models/Model/BrandModel.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
@@ -23,7 +24,7 @@ class CBrandShow extends StatelessWidget {
       margin: const EdgeInsets.all(CSizes.spaceBtwItems),
       child: Column(
         children: [
-          const CProductContainer(),
+          //  CProductContainer(showBorder: true, brand: BrandModel.empty()),
           Row(
               children:
                   images.map((image) => brandImages(image, context)).toList())
