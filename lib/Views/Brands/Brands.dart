@@ -4,10 +4,10 @@ import 'package:shoes_app/Models/Controller/BrandController.dart';
 import 'package:shoes_app/Views/Brands/Widgets/BrandProduct.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
-import 'package:shoes_app/utils/shared/CBrandShimmer.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CProductContainer.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CBrandShimmer.dart';
 
 class BrandsScreen extends StatelessWidget {
   const BrandsScreen({super.key});

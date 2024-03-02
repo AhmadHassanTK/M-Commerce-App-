@@ -10,7 +10,7 @@ import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
-import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CVerticalShimmerEffect.dart';
 
 class CategoryTab extends StatelessWidget {
   const CategoryTab({

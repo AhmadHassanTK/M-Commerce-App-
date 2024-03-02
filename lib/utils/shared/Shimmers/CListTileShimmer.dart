@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
-import 'package:shoes_app/utils/shared/CShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CShimmerEffect.dart';
 
 class CListTileShimmer extends StatelessWidget {
   const CListTileShimmer({super.key});

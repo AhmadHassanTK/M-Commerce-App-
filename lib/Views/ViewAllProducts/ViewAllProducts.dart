@@ -7,7 +7,7 @@ import 'package:shoes_app/Views/ViewAllProducts/Widgets/SortableProducts.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
-import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CVerticalShimmerEffect.dart';
 
 class ViewAllProductsScreen extends StatelessWidget {
   const ViewAllProductsScreen({

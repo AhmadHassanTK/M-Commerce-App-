@@ -15,7 +15,7 @@ import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CPrimaryHeaderContainer.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
-import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CVerticalShimmerEffect.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

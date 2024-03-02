@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
-import 'package:shoes_app/utils/shared/CShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CShimmerEffect.dart';
 
 class CVerticalShimmerEffect extends StatelessWidget {
   const CVerticalShimmerEffect({

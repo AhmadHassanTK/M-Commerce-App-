@@ -3,9 +3,9 @@ import 'package:shoes_app/Models/Controller/BrandController.dart';
 import 'package:shoes_app/Models/Model/CategoryModel.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/cloud_helper_functions.dart';
-import 'package:shoes_app/utils/shared/CBoxesShimmer.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CBoxesShimmer.dart';
 import 'package:shoes_app/utils/shared/CBrandShow.dart';
-import 'package:shoes_app/utils/shared/CListTileShimmer.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CListTileShimmer.dart';
 
 class CategoryBrands extends StatelessWidget {
   const CategoryBrands({

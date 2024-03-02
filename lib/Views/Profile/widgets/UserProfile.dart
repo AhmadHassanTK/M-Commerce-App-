@@ -9,7 +9,7 @@ import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
 import 'package:shoes_app/utils/shared/CRoundedImage.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
-import 'package:shoes_app/utils/shared/CShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CShimmerEffect.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});

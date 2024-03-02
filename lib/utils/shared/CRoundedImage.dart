@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
-import 'package:shoes_app/utils/shared/CShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CShimmerEffect.dart';
 
 class CRoundedImage extends StatelessWidget {
   const CRoundedImage({

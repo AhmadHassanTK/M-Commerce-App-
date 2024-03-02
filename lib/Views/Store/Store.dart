@@ -9,13 +9,13 @@ import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
-import 'package:shoes_app/utils/shared/CBrandShimmer.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CProductContainer.dart';
 import 'package:shoes_app/utils/shared/CSearchBar.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
 import 'package:shoes_app/utils/shared/CShoppingBagIcon.dart';
 import 'package:shoes_app/utils/shared/CTabBar.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CBrandShimmer.dart';
 
 class StoreView extends StatelessWidget {
   const StoreView({super.key});

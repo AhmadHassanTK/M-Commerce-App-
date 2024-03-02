@@ -6,7 +6,7 @@ import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CRoundedContainer.dart';
 import 'package:shoes_app/utils/shared/CRoundedImage.dart';
-import 'package:shoes_app/utils/shared/CShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CShimmerEffect.dart';
 
 class HomePromoSlider extends StatelessWidget {
   const HomePromoSlider({

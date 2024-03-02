@@ -7,7 +7,7 @@ import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
-import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
+import 'package:shoes_app/utils/shared/Shimmers/CVerticalShimmerEffect.dart';
 
 class WishListView extends StatelessWidget {
   const WishListView({super.key});
