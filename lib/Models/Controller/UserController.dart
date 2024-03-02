@@ -38,6 +38,7 @@ class UserController extends GetxController {
       final user = await usercloud.fetchUserData();
 
       this.user(user);
+      print(user.toJson());
     } catch (e) {
       user(UserModel.empty());
     } finally {

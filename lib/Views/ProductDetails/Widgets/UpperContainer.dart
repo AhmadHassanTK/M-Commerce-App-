@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/Models/Model/ProductModel.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/FavoriteIcon.dart';
 import 'package:shoes_app/Views/ProductDetails/Controller/ImageController.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
@@ -84,22 +84,7 @@ class UpperContainer extends StatelessWidget {
             ),
             CAppBar(
               showbackarrow: true,
-              actions: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: dark ? CColors.dark : CColors.light,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Iconsax.heart5,
-                        color: Colors.red,
-                      )),
-                )
-              ],
+              actions: [FavoriteIcon(productId: product.id)],
             )
           ],
         ),

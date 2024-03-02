@@ -13,6 +13,7 @@ import 'package:shoes_app/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:shoes_app/utils/exceptions/firebase_exceptions.dart';
 import 'package:shoes_app/utils/exceptions/format_exceptions.dart';
 import 'package:shoes_app/utils/exceptions/platform_exceptions.dart';
+import 'package:shoes_app/utils/local_storage/storage_utility.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -28,11 +29,12 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
-  screenRedirect() {
+  screenRedirect() async {
     if (auth.currentUser != null) {
       if (auth.currentUser!.emailVerified) {
         Get.offAll(() => const NavigationMenu());
       } else {
+        await CLocalStorage.init(auth.currentUser!.uid);
         Get.offAll(() => VerifyEmailScreen(email: auth.currentUser!.email));
       }
     } else {

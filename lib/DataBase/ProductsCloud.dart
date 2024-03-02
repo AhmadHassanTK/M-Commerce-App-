@@ -207,4 +207,27 @@ class ProductsCloud extends GetxController {
       CFullScreenLoader.stoploading();
     }
   }
+
+  Future<List<ProductModel>> getFavoritedProducts(
+      List<String> productIds) async {
+    try {
+      final snapshot = await db
+          .collection('Products')
+          .where(FieldPath.documentId, whereIn: productIds)
+          .get();
+
+      final products =
+          snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+
+      return products;
+    } on FirebaseException catch (e) {
+      throw CFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const CFormatException();
+    } on PlatformException catch (e) {
+      throw CPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
 }

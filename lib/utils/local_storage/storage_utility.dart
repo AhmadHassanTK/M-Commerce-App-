@@ -1,34 +1,64 @@
 import 'package:get_storage/get_storage.dart';
 
-class TLocalStorage {
-  static final TLocalStorage _instance = TLocalStorage._internal();
+class CLocalStorage {
+  // late final GetStorage _storage;
 
-  factory TLocalStorage() {
-    return _instance;
+  // static CLocalStorage? _instance;
+
+  // CLocalStorage._internal();
+
+  // factory CLocalStorage.instance() {
+  //   _instance ??= CLocalStorage._internal();
+  //   return _instance!;
+  // }
+
+  // static Future<void> init(String bucketname) async {
+  //   await GetStorage.init(bucketname);
+  //   _instance = CLocalStorage._internal();
+  //   _instance!._storage = GetStorage(bucketname);
+  // }
+
+  GetStorage? _storage;
+
+  static CLocalStorage? _instance;
+
+  CLocalStorage._internal();
+
+  factory CLocalStorage.instance() {
+    _instance ??= CLocalStorage._internal();
+    return _instance!;
   }
 
-  TLocalStorage._internal();
+  static Future<void> init(String bucketname) async {
+    if (_instance == null) {
+      _instance = CLocalStorage._internal();
+      await _instance!._initializeStorage(bucketname);
+    }
+  }
 
-  final _storage = GetStorage();
+  Future<void> _initializeStorage(String bucketname) async {
+    await GetStorage.init(bucketname);
+    _storage = GetStorage(bucketname);
+  }
 
   // Generic method to save data
   Future<void> saveData<T>(String key, T value) async {
-    await _storage.write(key, value);
+    await _storage?.write(key, value);
   }
 
   // Generic method to read data
   T? readData<T>(String key) {
-    return _storage.read<T>(key);
+    return _storage?.read<T>(key);
   }
 
   // Generic method to remove data
   Future<void> removeData(String key) async {
-    await _storage.remove(key);
+    await _storage?.remove(key);
   }
 
   // Clear all data in storage
   Future<void> clearAll() async {
-    await _storage.erase();
+    await _storage?.erase();
   }
 }
 

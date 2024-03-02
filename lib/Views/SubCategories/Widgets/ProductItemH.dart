@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/FavoriteIcon.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
-import 'package:shoes_app/utils/shared/CCircularIcon.dart';
 import 'package:shoes_app/utils/shared/CProductPriceText.dart';
 import 'package:shoes_app/utils/shared/CProductTitleText.dart';
 import 'package:shoes_app/utils/shared/CRoundedContainer.dart';
@@ -57,7 +57,7 @@ class ProductItemH extends StatelessWidget {
                 const Positioned(
                   right: 0,
                   top: 0,
-                  child: CCircularIcon(),
+                  child: FavoriteIcon(productId: ''),
                 ),
               ],
             ),

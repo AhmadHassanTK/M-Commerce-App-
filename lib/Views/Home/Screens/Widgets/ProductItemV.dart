@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/Models/Controller/ProductController.dart';
 import 'package:shoes_app/Models/Model/ProductModel.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/FavoriteIcon.dart';
 import 'package:shoes_app/Views/ProductDetails/ProductDetails.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/enums.dart';
@@ -75,22 +76,7 @@ class CProductItemV extends StatelessWidget {
                     ),
                   Positioned(
                     right: 0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: dark
-                            ? CColors.black.withOpacity(0.9)
-                            : CColors.white.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Iconsax.heart5,
-                          color: Colors.red,
-                          size: CSizes.lg,
-                        ),
-                      ),
-                    ),
+                    child: FavoriteIcon(productId: product.id),
                   ),
                 ],
               ),
