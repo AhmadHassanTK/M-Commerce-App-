@@ -32,13 +32,9 @@ class CLocalStorage {
   static Future<void> init(String bucketname) async {
     if (_instance == null) {
       _instance = CLocalStorage._internal();
-      await _instance!._initializeStorage(bucketname);
+      await GetStorage.init(bucketname);
+      _instance!._storage = GetStorage(bucketname);
     }
-  }
-
-  Future<void> _initializeStorage(String bucketname) async {
-    await GetStorage.init(bucketname);
-    _storage = GetStorage(bucketname);
   }
 
   // Generic method to save data
