@@ -75,6 +75,82 @@ class ProductsCloud extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> getProductsForBrand(
+      {required String brandId, int limit = -1}) async {
+    try {
+      final snapshot = limit == -1
+          ? await db
+              .collection('Products')
+              .where('Brand.Id', isEqualTo: brandId)
+              .get()
+          : await db
+              .collection('Products')
+              .where('Brand.Id', isEqualTo: brandId)
+              .limit(limit)
+              .get();
+
+      final result = snapshot.docs
+          .map((product) => ProductModel.fromSnapshot(product))
+          .toList();
+
+      return result;
+    } on FirebaseException catch (e) {
+      throw CFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const CFormatException();
+    } on PlatformException catch (e) {
+      throw CPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<List<ProductModel>> getProductsForCategory(
+      {required String categoryId, int limit = -1}) async {
+    try {
+      print('categoryId is $categoryId');
+      final snapshot = limit == -1
+          ? await db
+              .collection('ProductCategory')
+              .where('CategoryId', isEqualTo: categoryId)
+              .get()
+          : await db
+              .collection('ProductCategory')
+              .where('CategoryId', isEqualTo: categoryId)
+              .limit(limit)
+              .get();
+
+      List<String> productIds = snapshot.docs
+          .map((doc) => (doc['productId'] as String).trim())
+          .toList();
+
+      print('productIds is $productIds');
+
+      final products = await db
+          .collection('Products')
+          .where(FieldPath.documentId, whereIn: productIds)
+          .get();
+
+      print('products docs is ${products.docs}');
+
+      final result = products.docs
+          .map((product) => ProductModel.fromSnapshot(product))
+          .toList();
+      print('products is ${products.size}');
+      print('result is $result');
+
+      return result;
+    } on FirebaseException catch (e) {
+      throw CFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const CFormatException();
+    } on PlatformException catch (e) {
+      throw CPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
   Future<void> uploadDummyData(List<ProductModel> products) async {
     try {
       CFullScreenLoader.openLoadingDialog(

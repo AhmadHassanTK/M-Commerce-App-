@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/DataBase/BannerCloud.dart';
+import 'package:shoes_app/DataBase/BrandCategoryCloud.dart';
 import 'package:shoes_app/DataBase/BrandCloud.dart';
 import 'package:shoes_app/DataBase/CategoryCloud.dart';
 import 'package:shoes_app/DataBase/DummyData.dart';
+import 'package:shoes_app/DataBase/ProductCategoryCloud.dart';
 import 'package:shoes_app/DataBase/ProductsCloud.dart';
 import 'package:shoes_app/Views/Profile/widgets/LoadDataTile.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
@@ -21,6 +23,8 @@ class LoadDataScreen extends StatelessWidget {
     final bannercloud = BannerCloud.instance;
     final productcloud = Get.put(ProductsCloud());
     final brandcloud = Get.put(BrandCloud());
+    final brandcategorycloud = Get.put(BrandCategoryCloud());
+    final productcategorycloud = Get.put(ProductCategoryCloud());
     return Scaffold(
       appBar: const CAppBar(
         title: Text('Upload Data'),
@@ -89,21 +93,25 @@ class LoadDataScreen extends StatelessWidget {
                 'Make sure you have already uploaded all the content above.',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
-              const Column(
+              Column(
                 children: [
                   LoadDataTile(
-                    leadingIcon: Icon(
+                    leadingIcon: const Icon(
                       Iconsax.tag,
                       color: CColors.primary,
                     ),
                     title: 'Upload Brands & Categories Relation Data',
+                    onPressed: () => brandcategorycloud
+                        .uploadDummyData(DummyData.brandcategory),
                   ),
                   LoadDataTile(
-                    leadingIcon: Icon(
+                    leadingIcon: const Icon(
                       Iconsax.tag,
                       color: CColors.primary,
                     ),
                     title: 'Upload Product Categories Relational Data',
+                    onPressed: () => productcategorycloud
+                        .uploadDummyData(DummyData.prodctcategory),
                   ),
                 ],
               )

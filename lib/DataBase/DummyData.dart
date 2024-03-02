@@ -1,7 +1,9 @@
 import 'package:shoes_app/Models/Model/BannerModel.dart';
+import 'package:shoes_app/Models/Model/BrandCategoryModel.dart';
 import 'package:shoes_app/Models/Model/BrandModel.dart';
 import 'package:shoes_app/Models/Model/CategoryModel.dart';
 import 'package:shoes_app/Models/Model/ProductAtributeModel.dart';
+import 'package:shoes_app/Models/Model/ProductCategoryModel.dart';
 import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/Models/Model/ProductVariationModel.dart';
 import 'package:shoes_app/utils/constants/enums.dart';
@@ -558,5 +560,52 @@ class DummyData {
       ],
       productType: ProductType.variable.toString(),
     ),
+  ];
+
+  static final List<BrandCategoryModel> brandcategory = [
+    BrandCategoryModel(brandId: '1', categoryId: '6'),
+    BrandCategoryModel(brandId: '1', categoryId: '9'),
+    BrandCategoryModel(brandId: '1', categoryId: '8'),
+    BrandCategoryModel(brandId: '1', categoryId: '10'),
+    BrandCategoryModel(brandId: '2', categoryId: '6'),
+    BrandCategoryModel(brandId: '2', categoryId: '9'),
+    BrandCategoryModel(brandId: '2', categoryId: '8'),
+    BrandCategoryModel(brandId: '2', categoryId: '10'),
+    BrandCategoryModel(brandId: '3', categoryId: '1'),
+    BrandCategoryModel(brandId: '3', categoryId: '6'),
+    BrandCategoryModel(brandId: '3', categoryId: '8'),
+    BrandCategoryModel(brandId: '4', categoryId: '6'),
+    BrandCategoryModel(brandId: '4', categoryId: '9'),
+    BrandCategoryModel(brandId: '4', categoryId: '8'),
+    BrandCategoryModel(brandId: '4', categoryId: '10'),
+    BrandCategoryModel(brandId: '5', categoryId: '14'),
+    BrandCategoryModel(brandId: '5', categoryId: '15'),
+    BrandCategoryModel(brandId: '5', categoryId: '2'),
+    BrandCategoryModel(brandId: '6', categoryId: '3'),
+    BrandCategoryModel(brandId: '6', categoryId: '6'),
+    BrandCategoryModel(brandId: '6', categoryId: '16'),
+    BrandCategoryModel(brandId: '7', categoryId: '2'),
+    BrandCategoryModel(brandId: '7', categoryId: '15'),
+    BrandCategoryModel(brandId: '8', categoryId: '2'),
+    BrandCategoryModel(brandId: '9', categoryId: '2'),
+    BrandCategoryModel(brandId: '9', categoryId: '5'),
+    BrandCategoryModel(brandId: '9', categoryId: '2'),
+    BrandCategoryModel(brandId: '9', categoryId: '11'),
+    BrandCategoryModel(brandId: '9', categoryId: '12'),
+    BrandCategoryModel(brandId: '9', categoryId: '13'),
+    BrandCategoryModel(brandId: '9', categoryId: '13'),
+    BrandCategoryModel(brandId: '10', categoryId: '14'),
+    BrandCategoryModel(brandId: '10', categoryId: '2'),
+  ];
+
+  static final List<ProductCategoryModel> prodctcategory = [
+    ProductCategoryModel(productId: '001 ', categoryId: '1'),
+    ProductCategoryModel(productId: '002 ', categoryId: '16'),
+    ProductCategoryModel(productId: '002 ', categoryId: '3'),
+    ProductCategoryModel(productId: '003 ', categoryId: '16'),
+    ProductCategoryModel(productId: '004 ', categoryId: '2'),
+    ProductCategoryModel(productId: '005 ', categoryId: '4'),
+    ProductCategoryModel(productId: '006 ', categoryId: '1'),
+    ProductCategoryModel(productId: '001 ', categoryId: '6'),
   ];
 }

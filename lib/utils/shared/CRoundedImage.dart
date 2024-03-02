@@ -58,11 +58,13 @@ class CRoundedImage extends StatelessWidget {
                       const CShimmerEffect(width: 55, height: 55),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 )
-              : Image(
-                  image: AssetImage(imageurl),
-                  fit: boxFit,
-                  color: overlaycolor,
-                ),
+              : imageurl != ''
+                  ? Image(
+                      image: AssetImage(imageurl),
+                      fit: boxFit,
+                      color: overlaycolor,
+                    )
+                  : null,
           borderRadius: roundedborder
               ? BorderRadius.circular(borderradius)
               : BorderRadius.zero,

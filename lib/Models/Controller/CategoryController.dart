@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:shoes_app/DataBase/CategoryCloud.dart';
+import 'package:shoes_app/DataBase/ProductsCloud.dart';
 import 'package:shoes_app/Models/Model/CategoryModel.dart';
+import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/utils/loaders/Loaders.dart';
 
 class CategoryController extends GetxController {
@@ -11,6 +13,7 @@ class CategoryController extends GetxController {
   RxList<CategoryModel> featuredCategories = <CategoryModel>[].obs;
 
   final categorycloud = Get.put(CategoryCloud());
+  final productcloud = ProductsCloud.instance;
 
   @override
   void onInit() {
@@ -38,6 +41,17 @@ class CategoryController extends GetxController {
       CLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
     } finally {
       isloading.value = false;
+    }
+  }
+
+  Future<List<ProductModel>> getCategoryProducts(String categoryId) async {
+    try {
+      final products =
+          await productcloud.getProductsForCategory(categoryId: categoryId);
+      return products;
+    } catch (e) {
+      CLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      return [];
     }
   }
 }

@@ -1,13 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:shoes_app/Models/Controller/ProductController.dart';
+import 'package:shoes_app/Models/Controller/CategoryController.dart';
 import 'package:shoes_app/Models/Model/CategoryModel.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/ProductItemV.dart';
+import 'package:shoes_app/Views/Store/Widgets/CategoryBrand.dart';
 import 'package:shoes_app/Views/ViewAllProducts/ViewAllProducts.dart';
-import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
-import 'package:shoes_app/utils/shared/CBrandShow.dart';
+import 'package:shoes_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:shoes_app/utils/shared/CGridView.dart';
 import 'package:shoes_app/utils/shared/CSectionTitle.dart';
 import 'package:shoes_app/utils/shared/CVerticalShimmerEffect.dart';
@@ -21,7 +21,7 @@ class CategoryTab extends StatelessWidget {
   final CategoryModel category;
   @override
   Widget build(BuildContext context) {
-    final productController = Get.put(ProductController());
+    final controller = Get.put(CategoryController());
 
     return ListView(
         shrinkWrap: true,
@@ -31,51 +31,41 @@ class CategoryTab extends StatelessWidget {
             padding: const EdgeInsets.all(CSizes.defaultSpace),
             child: Column(
               children: [
-                const CBrandShow(
-                  images: [
-                    CImages.productImage1,
-                    CImages.productImage2,
-                    CImages.productImage3
-                  ],
-                ),
-                const CBrandShow(images: [
-                  CImages.productImage1,
-                  CImages.productImage2,
-                  CImages.productImage3
-                ]),
-                CSectionTitle(
-                  title: 'You might like',
-                  onPressed: () => Get.to(ViewAllProductsScreen(
-                    title: 'Popular Products',
-                    query: FirebaseFirestore.instance
-                        .collection('Products')
-                        .where('isFeatured', isEqualTo: true)
-                        .limit(6),
-                    futuremethod: productController.fetchAllFeaturedProducts(),
-                  )),
-                ),
-                const SizedBox(height: CSizes.spaceBtwItems),
-                Obx(() {
-                  if (productController.isloading.value) {
-                    return const CVerticalShimmerEffect();
-                  }
-                  if (productController.allProducts.isEmpty) {
-                    return Center(
-                      child: Text(
-                        'No Data Found!',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    );
-                  }
-                  return CGridView(
-                    itemcount: productController.allProducts.length,
-                    itembuilder: (context, index) {
-                      return CProductItemV(
-                        product: productController.allProducts[index],
+                CategoryBrands(category: category),
+                FutureBuilder(
+                    future: controller.getCategoryProducts(category.id),
+                    builder: (context, snapshot) {
+                      print(snapshot.data);
+                      final response =
+                          CCloudHelperFunctions.checkMultiRecordState(
+                              snapshot: snapshot,
+                              loader: const CVerticalShimmerEffect());
+
+                      if (response != null) return response;
+                      return Column(
+                        children: [
+                          CSectionTitle(
+                            title: 'You might like',
+                            onPressed: () {
+                              Get.to(() => ViewAllProductsScreen(
+                                    title: category.name,
+                                    futuremethod: controller
+                                        .getCategoryProducts(category.id),
+                                  ));
+                            },
+                          ),
+                          const SizedBox(height: CSizes.spaceBtwItems),
+                          CGridView(
+                            itemcount: snapshot.data!.length,
+                            itembuilder: (context, index) {
+                              return CProductItemV(
+                                product: snapshot.data![index],
+                              );
+                            },
+                          ),
+                        ],
                       );
-                    },
-                  );
-                })
+                    }),
               ],
             ),
           ),

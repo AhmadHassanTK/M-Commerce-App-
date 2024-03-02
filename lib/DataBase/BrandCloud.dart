@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shoes_app/Backend/FirebaseStorageServices.dart';
 import 'package:shoes_app/Models/Model/BrandModel.dart';
-import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/utils/exceptions/firebase_exceptions.dart';
 import 'package:shoes_app/utils/exceptions/format_exceptions.dart';
 import 'package:shoes_app/utils/exceptions/platform_exceptions.dart';
@@ -57,25 +56,32 @@ class BrandCloud extends GetxController {
     }
   }
 
-  Future<List<ProductModel>> getProductsForBrand(
-      {required String brandId, int limit = -1}) async {
+  Future<List<BrandModel>> getBrandForCategory(
+      {required String categoryId}) async {
     try {
-      final snapshot = limit == -1
-          ? await db
-              .collection('Products')
-              .where('Brand.Id', isEqualTo: brandId)
-              .get()
-          : await db
-              .collection('Products')
-              .where('Brand.Id', isEqualTo: brandId)
-              .limit(limit)
-              .get();
+      QuerySnapshot brandcategoryquery = await db
+          .collection('BrandCategory')
+          .where('CategoryId', isEqualTo: categoryId)
+          .get();
 
-      final result = snapshot.docs
-          .map((product) => ProductModel.fromSnapshot(product))
+      List<String> brandIDs = brandcategoryquery.docs
+          .map((brandcategory) => (brandcategory['brandId'] as String).trim())
           .toList();
 
-      return result;
+      final brandsquery = await db
+          .collection('Brands')
+          .where(FieldPath.documentId, whereIn: brandIDs)
+          .get();
+
+      print('brandsquery is ${brandsquery.docs}');
+
+      List<BrandModel> brands =
+          brandsquery.docs.map((e) => BrandModel.fromSnapshot(e)).toList();
+      print('the brand length is ${brands.length}');
+
+      print('the brand id is ${brands[0].id}');
+
+      return brands;
     } on FirebaseException catch (e) {
       throw CFirebaseException(e.code).message;
     } on FormatException catch (_) {

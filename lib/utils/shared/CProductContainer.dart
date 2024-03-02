@@ -42,7 +42,7 @@ class CProductContainer extends StatelessWidget {
                 ),
                 child: CRoundedImage(
                   imageurl: brand.image,
-                  isNetworkImage: brand != BrandModel.empty() ? true : false,
+                  isNetworkImage: brand.image == '' ? false : true,
                   backgroundcolor: Colors.transparent,
                   overlaycolor: isdark ? CColors.white : CColors.black,
                 ),
