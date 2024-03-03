@@ -44,7 +44,8 @@ class CategoriesListView extends StatelessWidget {
                 right: CSizes.spaceBtwItems,
               ),
               child: GestureDetector(
-                onTap: () => Get.to(() => const SubCategoriesScreen()),
+                onTap: () =>
+                    Get.to(() => SubCategoriesScreen(category: category)),
                 child: Column(
                   children: [
                     CRoundedImage(

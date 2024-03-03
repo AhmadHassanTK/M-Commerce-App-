@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Controller/ProductController.dart';
+import 'package:shoes_app/Models/Model/ProductModel.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/FavoriteIcon.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
-import 'package:shoes_app/utils/constants/image_strings.dart';
+import 'package:shoes_app/utils/constants/enums.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CProductPriceText.dart';
@@ -12,11 +14,16 @@ import 'package:shoes_app/utils/shared/CRoundedImage.dart';
 import 'package:shoes_app/utils/shared/CVerfiedIconWithText.dart';
 
 class ProductItemH extends StatelessWidget {
-  const ProductItemH({super.key});
+  const ProductItemH({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = CHelperFunctions.isDarkMode(context);
+    final productcontroller = ProductController.instance;
+    final salePercentage =
+        productcontroller.salePercentage(product.price, product.saleprice);
     return Container(
       width: 310,
       padding: const EdgeInsets.all(1),
@@ -32,32 +39,34 @@ class ProductItemH extends StatelessWidget {
             backgroundcolor: dark ? CColors.dark : CColors.light,
             child: Stack(
               children: [
-                const CRoundedImage(
-                  imageurl: CImages.productImage1,
+                CRoundedImage(
+                  imageurl: product.thumbnail,
                   roundedborder: true,
+                  isNetworkImage: true,
                 ),
-                Positioned(
-                  top: 10,
-                  child: CRoundedContainer(
-                    radius: CSizes.sm,
-                    backgroundcolor: CColors.secondary.withOpacity(0.8),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: CSizes.sm,
-                      vertical: CSizes.xs,
-                    ),
-                    child: Text(
-                      '25%',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .apply(color: CColors.black),
+                if (salePercentage != null)
+                  Positioned(
+                    top: 10,
+                    child: CRoundedContainer(
+                      radius: CSizes.sm,
+                      backgroundcolor: CColors.secondary.withOpacity(0.8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: CSizes.sm,
+                        vertical: CSizes.xs,
+                      ),
+                      child: Text(
+                        '$salePercentage%',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .apply(color: CColors.black),
+                      ),
                     ),
                   ),
-                ),
-                const Positioned(
+                Positioned(
                   right: 0,
                   top: 0,
-                  child: FavoriteIcon(productId: ''),
+                  child: FavoriteIcon(productId: product.id),
                 ),
               ],
             ),
@@ -68,22 +77,37 @@ class ProductItemH extends StatelessWidget {
               padding: const EdgeInsets.only(top: CSizes.sm, left: CSizes.sm),
               child: Column(
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CProductTitleText(
-                        title: 'Green Nike Half Sleeves Shirt',
+                        title: product.title,
                         smallsize: true,
                       ),
-                      SizedBox(height: CSizes.spaceBtwItems / 2),
-                      CVerifiedIconWithText(text: 'Nike'),
+                      const SizedBox(height: CSizes.spaceBtwItems / 2),
+                      CVerifiedIconWithText(text: product.brand!.name),
                     ],
                   ),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const CProductPriceText(price: '256'),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            if (product.productType ==
+                                    ProductType.single.toString() &&
+                                product.saleprice > 0)
+                              CProductPriceText(
+                                price: product.price.toString(),
+                                linethrough: true,
+                              ),
+                            CProductPriceText(
+                                price:
+                                    productcontroller.getProductPrice(product)),
+                          ],
+                        ),
+                      ),
                       Container(
                         decoration: const BoxDecoration(
                           color: CColors.dark,

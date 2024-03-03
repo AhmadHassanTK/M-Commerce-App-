@@ -30,6 +30,26 @@ class CategoryCloud extends GetxController {
     }
   }
 
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    try {
+      final snapshot = await db
+          .collection('Categories')
+          .where('ParentId', isEqualTo: categoryId)
+          .get();
+      final subcategories =
+          snapshot.docs.map((e) => CategoryModel.fromSnapshot(e)).toList();
+      return subcategories;
+    } on FirebaseException catch (e) {
+      throw CFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const CFormatException();
+    } on PlatformException catch (e) {
+      throw CPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
   Future<void> uploadDummyData(List<CategoryModel> categories) async {
     try {
       final storage = Get.put(FirebaseStorageServices());
