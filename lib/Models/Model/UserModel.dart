@@ -22,7 +22,7 @@ class UserModel {
 
   String get fullname => '$firstName $lastName';
 
-  String get formattedPhoneno => TFormatter.formatPhoneNumber(phoneNumber);
+  String get formattedPhoneno => CFormatter.formatPhoneNumber(phoneNumber);
 
   static List<String> nameParts(fullname) => fullname.split(" ");
 

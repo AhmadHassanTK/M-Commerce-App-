@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Controller/AddressController.dart';
 import 'package:shoes_app/Views/AddressPage/AddNewAddressScreen.dart';
 import 'package:shoes_app/Views/AddressPage/Widgets/AddressContainer.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
+import 'package:shoes_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
 
 class AddressView extends StatelessWidget {
@@ -11,6 +13,7 @@ class AddressView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AddressController());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.to(() => const AddNewAddressScreen()),
@@ -24,15 +27,27 @@ class AddressView extends StatelessWidget {
         ),
         showbackarrow: true,
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AddressContainer(selectedaddress: true),
-              AddressContainer(selectedaddress: false),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Obx(
+          () => FutureBuilder(
+              key: Key(controller.refreshData.value.toString()),
+              future: controller.getAllUsersAddresses(),
+              builder: (context, snapshot) {
+                final widget = CCloudHelperFunctions.checkMultiRecordState(
+                  snapshot: snapshot,
+                );
+                if (widget != null) return widget;
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => AddressContainer(
+                    addressmodel: snapshot.data![index],
+                    onTap: () =>
+                        controller.selectAddress(snapshot.data![index]),
+                  ),
+                );
+              }),
         ),
       ),
     );
