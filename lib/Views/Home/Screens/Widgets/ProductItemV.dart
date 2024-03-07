@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:shoes_app/Models/Controller/ProductController.dart';
 import 'package:shoes_app/Models/Model/ProductModel.dart';
+import 'package:shoes_app/Views/Home/Screens/Widgets/AddToCart.dart';
 import 'package:shoes_app/Views/Home/Screens/Widgets/FavoriteIcon.dart';
 import 'package:shoes_app/Views/ProductDetails/ProductDetails.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
@@ -127,25 +127,7 @@ class CProductItemV extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: CColors.dark,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(
-                        CSizes.cardRadiusMd,
-                      ),
-                      bottomRight: Radius.circular(CSizes.productImageRadius),
-                    ),
-                  ),
-                  child: const SizedBox(
-                    height: CSizes.iconLg * 1.2,
-                    width: CSizes.iconLg * 1.2,
-                    child: Icon(
-                      Iconsax.add,
-                      color: CColors.white,
-                    ),
-                  ),
-                ),
+                AddToCart(product: product),
               ],
             )
           ],

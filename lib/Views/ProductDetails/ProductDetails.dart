@@ -27,7 +27,7 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: ProductBottomBar(),
+        bottomNavigationBar: ProductBottomBar(product: product),
         body: SingleChildScrollView(
           child: Column(
             children: [

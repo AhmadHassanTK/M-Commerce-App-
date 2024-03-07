@@ -11,6 +11,7 @@ class CRoundedIcon extends StatelessWidget {
     required this.icon,
     this.iconcolor = CColors.white,
     this.iconsize = CSizes.lg,
+    this.onPressed,
   });
 
   final double? width, height;
@@ -18,6 +19,7 @@ class CRoundedIcon extends StatelessWidget {
   final IconData icon;
   final Color? iconcolor;
   final double? iconsize;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class CRoundedIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: IconButton(
-          onPressed: () {},
+          onPressed: onPressed,
           icon: Icon(
             icon,
             color: iconcolor,

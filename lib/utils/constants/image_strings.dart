@@ -61,6 +61,9 @@ class CImages {
   static const String dockeranimation =
       'assets/images/animations/141594-animation-of-docer.json';
 
+  static const String cartAnimation =
+      'assets/images/animations/lady-adding-product-in-cart-animation.json';
+
   static const String pensilanimation =
       'assets/images/animations/140429-pencil-drawing.json';
 

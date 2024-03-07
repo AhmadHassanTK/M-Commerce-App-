@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_app/Models/Model/CartItemModel.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
-import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 import 'package:shoes_app/utils/helpers/helper_functions.dart';
 import 'package:shoes_app/utils/shared/CProductTitleText.dart';
@@ -10,7 +10,10 @@ import 'package:shoes_app/utils/shared/CVerfiedIconWithText.dart';
 class CCartItem extends StatelessWidget {
   const CCartItem({
     super.key,
+    required this.item,
   });
+
+  final CartItemModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,8 @@ class CCartItem extends StatelessWidget {
     return Row(
       children: [
         CRoundedImage(
-          imageurl: CImages.productImage1,
+          imageurl: item.image ?? '',
+          isNetworkImage: true,
           height: 60,
           width: 60,
           padding: const EdgeInsets.all(CSizes.sm),
@@ -29,31 +33,26 @@ class CCartItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CVerifiedIconWithText(text: 'Nike'),
-            const CProductTitleText(
-              title: 'Black Sports shoes',
+            CVerifiedIconWithText(text: item.brandName ?? ''),
+            CProductTitleText(
+              title: item.title,
               maxlines: 1,
             ),
             Text.rich(
               TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Color ',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  TextSpan(
-                    text: 'Blue ',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  TextSpan(
-                    text: 'Size ',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  TextSpan(
-                    text: 'EU 08',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
+                children: (item.selectedVariations ?? {})
+                    .entries
+                    .map(
+                      (e) => TextSpan(children: [
+                        TextSpan(
+                            text: e.key,
+                            style: Theme.of(context).textTheme.bodySmall),
+                        TextSpan(
+                            text: e.value,
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ]),
+                    )
+                    .toList(),
               ),
             ),
           ],

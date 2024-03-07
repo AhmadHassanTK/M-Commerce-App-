@@ -18,7 +18,7 @@ class CheckoutItems extends StatelessWidget {
         return const Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CCartItem(),
+            //  CCartItem(),
           ],
         );
       },

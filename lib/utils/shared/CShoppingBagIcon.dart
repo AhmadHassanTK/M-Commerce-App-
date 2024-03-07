@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shoes_app/Models/Controller/CartController.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 
 class CShoppingCartIcon extends StatelessWidget {
@@ -11,6 +13,7 @@ class CShoppingCartIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CartController());
     return Stack(
       children: [
         IconButton(
@@ -28,12 +31,14 @@ class CShoppingCartIcon extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
           ),
           child: Center(
-            child: Text(
-              '2',
-              style: Theme.of(context)
-                  .textTheme
-                  .labelSmall!
-                  .apply(color: CColors.white),
+            child: Obx(
+              () => Text(
+                controller.noOfCartItems.toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall!
+                    .apply(color: CColors.white),
+              ),
             ),
           ),
         )
