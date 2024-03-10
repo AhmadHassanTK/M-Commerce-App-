@@ -42,11 +42,13 @@ class AddToCart extends StatelessWidget {
             height: CSizes.iconLg * 1.2,
             width: CSizes.iconLg * 1.2,
             child: productcounts > 0
-                ? Text(productcounts.toString(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .apply(color: CColors.white))
+                ? Center(
+                    child: Text(productcounts.toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .apply(color: CColors.white)),
+                  )
                 : const Icon(
                     Iconsax.add,
                     color: CColors.white,

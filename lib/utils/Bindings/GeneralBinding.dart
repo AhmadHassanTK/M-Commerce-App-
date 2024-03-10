@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:shoes_app/DataBase/UserCloud.dart';
+import 'package:shoes_app/Models/Controller/AddressController.dart';
 import 'package:shoes_app/Models/Controller/UserController.dart';
+import 'package:shoes_app/Views/Checkout/Controller/CheckoutController.dart';
 import 'package:shoes_app/Views/ForgetPassword/controller/ForgetPasswordController.dart';
 import 'package:shoes_app/Views/Login/Controller/LoginController.dart';
 import 'package:shoes_app/Views/Signup/Controller/SignUpController.dart';
@@ -15,5 +17,7 @@ class GeneralBinding extends Bindings {
     Get.put(UserController());
     Get.put(LoginController());
     Get.put(ForgetPasswordController());
+    Get.put(AddressController());
+    Get.put(CheckOutController());
   }
 }

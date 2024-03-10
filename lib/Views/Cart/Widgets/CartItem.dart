@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shoes_app/Models/Model/CartItemModel.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
@@ -30,32 +32,34 @@ class CCartItem extends StatelessWidget {
           backgroundcolor: dark ? CColors.darkGrey : CColors.grey,
         ),
         const SizedBox(width: CSizes.spaceBtwItems),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CVerifiedIconWithText(text: item.brandName ?? ''),
-            CProductTitleText(
-              title: item.title,
-              maxlines: 1,
-            ),
-            Text.rich(
-              TextSpan(
-                children: (item.selectedVariations ?? {})
-                    .entries
-                    .map(
-                      (e) => TextSpan(children: [
-                        TextSpan(
-                            text: e.key,
-                            style: Theme.of(context).textTheme.bodySmall),
-                        TextSpan(
-                            text: e.value,
-                            style: Theme.of(context).textTheme.bodyLarge),
-                      ]),
-                    )
-                    .toList(),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CVerifiedIconWithText(text: item.brandName ?? ''),
+              CProductTitleText(
+                title: item.title,
+                maxlines: 1,
               ),
-            ),
-          ],
+              Text.rich(
+                TextSpan(
+                  children: (item.selectedVariations ?? {})
+                      .entries
+                      .map(
+                        (e) => TextSpan(children: [
+                          TextSpan(
+                              text: e.key + ' ',
+                              style: Theme.of(context).textTheme.bodySmall),
+                          TextSpan(
+                              text: e.value + ' ',
+                              style: Theme.of(context).textTheme.bodyLarge),
+                        ]),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
         )
       ],
     );

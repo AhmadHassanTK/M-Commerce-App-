@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_app/Models/Controller/CartController.dart';
 import 'package:shoes_app/Views/Cart/Widgets/CartItem.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
 
@@ -9,16 +10,17 @@ class CheckoutItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
     return ListView.separated(
       shrinkWrap: true,
       separatorBuilder: (context, index) =>
           const SizedBox(height: CSizes.defaultSpace),
-      itemCount: 2,
+      itemCount: controller.cartItems.length,
       itemBuilder: (context, index) {
-        return const Column(
+        return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            //  CCartItem(),
+            CCartItem(item: controller.cartItems[index]),
           ],
         );
       },

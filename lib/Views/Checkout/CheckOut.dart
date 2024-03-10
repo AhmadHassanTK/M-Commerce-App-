@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_app/Models/Controller/CartController.dart';
+import 'package:shoes_app/Models/Controller/OrderController.dart';
+import 'package:shoes_app/Views/Checkout/Controller/CheckoutController.dart';
 import 'package:shoes_app/Views/Checkout/Widgets/AddressSection.dart';
 import 'package:shoes_app/Views/Checkout/Widgets/AmountSection.dart';
 import 'package:shoes_app/Views/Checkout/Widgets/PaymentSection.dart';
@@ -10,6 +13,7 @@ import 'package:shoes_app/Views/NavigationMenu/Screens/NavigationMenu.dart';
 import 'package:shoes_app/utils/constants/colors.dart';
 import 'package:shoes_app/utils/constants/image_strings.dart';
 import 'package:shoes_app/utils/constants/sizes.dart';
+import 'package:shoes_app/utils/helpers/pricing_calculator.dart';
 import 'package:shoes_app/utils/shared/CAppBar.dart';
 import 'package:shoes_app/utils/shared/CCouponCode.dart';
 import 'package:shoes_app/utils/shared/CRoundedContainer.dart';
@@ -20,19 +24,16 @@ class CheckoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartcontroller = CartController.instance;
+    final ordercontroller = Get.put(OrderController());
+    final subtotal = cartcontroller.totalCartPrice.value;
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(CSizes.sm),
         child: ElevatedButton(
-          onPressed: () => Get.to(
-            () => SuccessScreen(
-              image: CImages.successfulPaymentIcon,
-              subTitle: 'Your item will be shipped soon!',
-              title: 'Payment Success!',
-              onPressed: () => Get.offAll(() => const NavigationMenu()),
-            ),
-          ),
-          child: const Text('Checkout \$256'),
+          onPressed: () => ordercontroller.processOrder(subtotal),
+          child: Text(
+              'Checkout \$${TPricingCalculator.calculateTotalPrice(subtotal, 'US')}'),
         ),
       ),
       appBar: CAppBar(
