@@ -18,9 +18,10 @@ class OrderCloud extends GetxController {
       final result =
           await db.collection('Users').doc(userid).collection('Orders').get();
 
-      print(result.docs);
-      print(result.docs.map((e) => OrderModel.fromSnapshot(e)).toList());
-      return result.docs.map((e) => OrderModel.fromSnapshot(e)).toList();
+      final orders =
+          result.docs.map((e) => OrderModel.fromSnapshot(e)).toList();
+
+      return orders;
     } catch (e) {
       throw 'Something went wrong while fetching order information. Try again later';
     }

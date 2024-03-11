@@ -57,7 +57,7 @@ class AddressModel {
   AddressModel.fromJson(Map<String, dynamic> snapshot)
       : id = snapshot['Id'] as String,
         name = snapshot['Name'] as String,
-        phoneNumber = snapshot['phoneNumber'] as String,
+        phoneNumber = snapshot['PhoneNumber'] as String,
         street = snapshot['Street'] as String,
         city = snapshot['City'] as String,
         postalCode = snapshot['PostalCode'] as String,
