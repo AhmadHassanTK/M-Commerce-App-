@@ -30,7 +30,7 @@ class CategoriesListView extends StatelessWidget {
         );
       }
       return SizedBox(
-        height: 80,
+        height: 81,
         child: ListView.separated(
           shrinkWrap: true,
           itemCount: categorycontroller.featuredCategories.length,

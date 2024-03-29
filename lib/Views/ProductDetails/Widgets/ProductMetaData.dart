@@ -96,8 +96,17 @@ class ProductMetaData extends StatelessWidget {
               const SizedBox(width: CSizes.spaceBtwItems),
               Text(
                 productController.stockStatue(product.stock),
-                style: Theme.of(context).textTheme.titleMedium,
-              )
+                style:
+                    productController.stockStatue(product.stock) == 'In Stock'
+                        ? Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .apply(color: Colors.green)
+                        : Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .apply(color: Colors.red),
+              ),
             ],
           ),
           Row(
